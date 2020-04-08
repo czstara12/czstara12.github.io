@@ -3,13 +3,13 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle: ''
-description: ''
-keywords:
-author: John Doe
-language: zh-Hans
-timezone: ''
+title: 星辰物语的编程分享
+subtitle: "starstory's programming sharing"
+description: '热爱研究各类电子技术'
+keywords: 
+author: 星辰物语
+language: zh-CN
+timezone: 
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
