@@ -1,7 +1,11 @@
 ---
 title: Discuzu和ubb代码大全
 date: 2020-04-08 15:35:41
-tags: other
+tags: 
+- Discuzu
+- UBB
+categories:
+- other
 ---
 
 Discuzu和UBB代码收集
