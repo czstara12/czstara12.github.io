@@ -1,3 +1,9 @@
+---
+title: Discuzu和ubb代码大全
+date: 2020-04-08 15:35:41
+tags:
+---
+
 # Discuzu和UBB代码
 
 ## UBB代码
@@ -370,16 +376,16 @@ Discuz! 代码是一个 HTML 代码的简化版本，来简化对帖子显示格
 
 4、字体颜色
 > [ color=red ]字体颜色[ /color ]
-说明："color=red"等号后面的是颜色的英文单词，类似的还有蓝色：blue、绿色：green、粉色：pink、灰色：gray等，同样也可以使用颜色的16进制代码，比如"FF6600"
+> 说明："color=red"等号后面的是颜色的英文单词，类似的还有蓝色：blue、绿色：green、粉色：pink、灰色：gray等，同样也可以使用颜色的16进制代码，比如"FF6600"
 
 5、字体大小
 > [ size=3 ]字体大小为3[ /size ]
-说明：本论坛字体大小范围是从"1"——"7"。
+> 说明：本论坛字体大小范围是从"1"——"7"。
 
 6、改变字体
 > [ font=黑体 ]字体为黑体[ /font ]
-说明："font=黑体"等号后面的为字体名字，字体必需使用论坛已用的字体库，否则无法辨认。论坛的中文字体默认为宋体，英文字母默认字体为Tahoma。各支持字体效果如下： QUOTE: 宋体黑体 Arial Book Antiqua Century Gothic Courier New Georgia Impact Tahoma Times New Roman Verdana
-7、对齐格式
+> 说明："font=黑体"等号后面的为字体名字，字体必需使用论坛已用的字体库，否则无法辨认。论坛的中文字体默认为宋体，英文字母默认字体为Tahoma。各支持字体效果如下： QUOTE: 宋体黑体 Arial Book Antiqua Century Gothic Courier New Georgia Impact Tahoma Times New Roman Verdana
+> 7、对齐格式
 > [ align=center ]居中对齐[ /align ]
 
 说明："align="等号后面是对齐格式，左对齐为left，居中为center，右对齐为right。
@@ -419,7 +425,7 @@ Discuz! 代码是一个 HTML 代码的简化版本，来简化对帖子显示格
 
 18、链接音乐
 > `[ wma ]http://www.verywd.com/0/404/zhuguli/sound/2006930211321985.wma[ /wma ]`
-说明：由于插件是WMP播放器，所有只能支持WMP默认能播放的音频。另外，本论坛还支持RM格式的音视频。
+> 说明：由于插件是WMP播放器，所有只能支持WMP默认能播放的音频。另外，本论坛还支持RM格式的音视频。
 
 19、链接视频
 > `[ wmv ]http://www.verywd.com/FamilyFile/0/76/janfans/Video/200608291628307422326.wmv[ /wmv ]`
