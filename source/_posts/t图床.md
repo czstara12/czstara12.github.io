@@ -37,11 +37,13 @@ tags:
 
 6. 点"验证图片上传选项" 弹出登录窗口 
 
-   ![image-20200412114858196](http://pan-yz.chaoxing.com/download/downloadfile?fleid=456063594471206912&puid=81944713)
+   ![image-20200415091842809](http://pan-yz.chaoxing.com/download/downloadfile?fleid=457112030802071552&puid=81944713)
+
+   
 
 7. 大功告成 你可以用一个markdown文件测试
 
-![image-20200412115341576](http://pan-yz.chaoxing.com/download/downloadfile?fleid=456063593245536256&puid=81944713)
+![image-20200415091916716](http://pan-yz.chaoxing.com/download/downloadfile?fleid=457112034192510976&puid=81944713)
 
 成功
 
@@ -53,7 +55,7 @@ tags:
 
 1. 登录[此网页](http://pan-yz.chaoxing.com/)
 
-![image-20200412120421201](http://pan-yz.chaoxing.com/download/downloadfile?fleid=456067638726606848&puid=81944713)
+![image-20200415091941274](http://pan-yz.chaoxing.com/download/downloadfile?fleid=457112037493428224&puid=81944713)
 
 2. 找到要分享的文件 点下载
 
