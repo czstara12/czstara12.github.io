@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"czstara12.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="树莓派环境搭建本文介绍了树莓派web python(jupyterLab)运行环境的搭建方法 以及对应的批量制作时的备份镜像方法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="树莓派jupyterlab环境搭建">
+<meta property="og:url" content="http://czstara12.github.io/2020/11/09/%E6%A0%91%E8%8E%93%E6%B4%BEjupyterlab%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/index.html">
+<meta property="og:site_name" content="星辰物语的编程分享">
+<meta property="og:description" content="树莓派环境搭建本文介绍了树莓派web python(jupyterLab)运行环境的搭建方法 以及对应的批量制作时的备份镜像方法">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="c:%5CUsers%5Cczsta%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200819163207784.png">
+<meta property="og:image" content="c:%5CUsers%5Cczsta%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200819163413163.png">
+<meta property="og:image" content="c:%5CUsers%5Cczsta%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200819163836570.png">
+<meta property="og:image" content="c:%5CUsers%5Cczsta%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200819165633434.png">
+<meta property="og:image" content="c:%5CUsers%5Cczsta%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200819171028114.png">
+<meta property="og:image" content="c:%5CUsers%5Cczsta%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200819171146203.png">
+<meta property="article:published_time" content="2020-11-09T11:02:31.000Z">
+<meta property="article:modified_time" content="2020-11-09T03:07:56.057Z">
+<meta property="article:author" content="星辰物语">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="RaspberryPi">
+<meta property="article:tag" content="jupyterLab">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="c:%5CUsers%5Cczsta%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200819163207784.png">
+
+<link rel="canonical" href="http://czstara12.github.io/2020/11/09/%E6%A0%91%E8%8E%93%E6%B4%BEjupyterlab%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>树莓派jupyterlab环境搭建 | 星辰物语的编程分享</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">星辰物语的编程分享</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">starstory's programming sharing</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-list fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://czstara12.github.io/2020/11/09/%E6%A0%91%E8%8E%93%E6%B4%BEjupyterlab%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/32411140?s=460&u=a2fd61c0415bce60d52d038fc137e75716c3c762&v=4">
+      <meta itemprop="name" content="星辰物语">
+      <meta itemprop="description" content="热爱研究各类电子技术">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="星辰物语的编程分享">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          树莓派jupyterlab环境搭建
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-11-09 11:02:31 / 修改时间：03:07:56" itemprop="dateCreated datePublished" datetime="2020-11-09T11:02:31+00:00">2020-11-09</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="树莓派环境搭建"><a href="#树莓派环境搭建" class="headerlink" title="树莓派环境搭建"></a>树莓派环境搭建</h1><p>本文介绍了树莓派web python(jupyterLab)运行环境的搭建方法</p>
+<p>以及对应的批量制作时的备份镜像方法</p>
+<a id="more"></a>
+
+<p>下载镜像<a href="https://www.raspberrypi.org/downloads/raspberry-pi-os/" target="_blank" rel="noopener">https://www.raspberrypi.org/downloads/raspberry-pi-os/</a></p>
+<p><img src="C:%5CUsers%5Cczsta%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200819163207784.png" alt="下载界面(若图像无法加载 可访问原网站czstara12.github.io)"></p>
+<p>图为带桌面 不含软件</p>
+<p>插入内存卡</p>
+<p>格式化SDFormatter</p>
+<p><img src="C:%5CUsers%5Cczsta%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200819163413163.png" alt="SDFormatter界面(若图像无法加载 可访问原网站czstara12.github.io)"></p>
+<p>确定-确定</p>
+<h2 id="写入镜像"><a href="#写入镜像" class="headerlink" title="写入镜像"></a>写入镜像</h2><p>解压缩</p>
+<p>win32 disk imager</p>
+<p>选择解压出来的文件</p>
+<p>点write(写入)</p>
+<p><img src="C:%5CUsers%5Cczsta%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200819163836570.png" alt="Win32 Disk Imager界面(若图像无法加载 可访问原网站czstara12.github.io)"></p>
+<p>注意右上方的设备是否为要写入的设备</p>
+<p>完成后会出现一个名为boot的盘</p>
+<p>向其中写入一个名为ssh的空文件</p>
+<p>和一个名为wpa_supplicant.conf的配置文件</p>
+<p>配置文件内容</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">country=CN</span><br><span class="line">ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev</span><br><span class="line">update_config=1</span><br><span class="line"></span><br><span class="line">network=&#123;</span><br><span class="line">	ssid="wifi ssid"#wifi名</span><br><span class="line">	psk="password"#wifi密码</span><br><span class="line">	priority=2#优先级 数字越高 越优先使用</span><br><span class="line">&#125;</span><br><span class="line">network=&#123;</span><br><span class="line">	ssid="wifi ssid 2"</span><br><span class="line">	psk="password2"</span><br><span class="line">	priority=1</span><br><span class="line">&#125;</span><br><span class="line">#或者更多</span><br></pre></td></tr></table></figure>
+
+<p>要求电脑连接上面配置文件所连接的wifi</p>
+<p><img src="C:%5CUsers%5Cczsta%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200819165633434.png" alt=""></p>
+<p>弹出</p>
+<p>将内存卡转移到树莓派上</p>
+<p>上电</p>
+<p>Advanced IP Scanner</p>
+<p>扫描树莓派ip(如果可以进入路由器后台 可直接进入路由器后台查看)</p>
+<p><img src="C:%5CUsers%5Cczsta%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200819171028114.png" alt="image-20200819171028114"></p>
+<p>可以看到</p>
+<p>使用ssh进行连接</p>
+<p><img src="C:%5CUsers%5Cczsta%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200819171146203.png" alt="image-20200819171146203"></p>
+<p>用户名</p>
+<p>pi</p>
+<p>默认密码</p>
+<p>raspberry</p>
+<h2 id="更新软件"><a href="#更新软件" class="headerlink" title="更新软件"></a>更新软件</h2><p>更换清华源</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vi /etc/apt/sources.list</span><br></pre></td></tr></table></figure>
+
+<p>注释原源 添加新源</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">deb http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ buster main contrib non-free rpi</span><br><span class="line">deb-src http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ buster main contrib non-free rpi</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vi /etc/apt/sources.list.d/raspi.list</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">deb http://mirrors.tuna.tsinghua.edu.cn/raspberrypi/ buster main ui</span><br></pre></td></tr></table></figure>
+
+<p>更新</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get upgrade</span><br><span class="line">sudo apt-get install -y vim#安装包</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="调节配置"><a href="#调节配置" class="headerlink" title="调节配置"></a>调节配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo raspi-config</span><br></pre></td></tr></table></figure>
+
+<p>设置boot启动desktop</p>
+<p>3-B1-B3</p>
+<p>打开摄像头接口</p>
+<p>5-B1-是</p>
+<p>打开VNC</p>
+<p>5-B3-是</p>
+<p>打开串口</p>
+<p>5-B6-否-是</p>
+<p>拓展内存</p>
+<p>7-A1</p>
+<p>设置分辨率</p>
+<p>7-A5</p>
+<p>finish</p>
+<h2 id="安装opencv"><a href="#安装opencv" class="headerlink" title="安装opencv"></a>安装opencv</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install python3-opencv</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="安装jupyterlab"><a href="#安装jupyterlab" class="headerlink" title="安装jupyterlab"></a>安装jupyterlab</h2><p>服务器在国外 网络不好建议使用代理</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export http_proxy&#x3D;&#39;http:&#x2F;&#x2F;127.0.0.1:7890&#39;</span><br><span class="line">export https_proxy&#x3D;&#39;https:&#x2F;&#x2F;127.0.0.1:7890&#39;</span><br></pre></td></tr></table></figure>
+
+<p>安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install libffi-dev#安装一个支持包</span><br><span class="line">pip3 install -i https:&#x2F;&#x2F;pypi.tuna.tsinghua.edu.cn&#x2F;simple jupyterlab</span><br></pre></td></tr></table></figure>
+
+<p>重启</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo reboot</span><br></pre></td></tr></table></figure>
+
+
+
+<p>开放外网访问</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">jupyter-notebook --generate-config</span><br><span class="line">sudo vim &#x2F;home&#x2F;pi&#x2F;.jupyter&#x2F;jupyter_notebook_config.py</span><br></pre></td></tr></table></figure>
+
+<p>写入</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">c.NotebookApp.allow_origin = <span class="string">'*'</span> <span class="comment">#allow all origins</span></span><br><span class="line">c.NotebookApp.ip = <span class="string">'0.0.0.0'</span> <span class="comment"># listen on all IPs</span></span><br><span class="line">c.NotebookApp.notebook_dir = <span class="string">'/home/pi'</span></span><br></pre></td></tr></table></figure>
+
+<p>设置密码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jupyter-notebook password</span><br></pre></td></tr></table></figure>
+
+<p>添加自启动</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/rc.local</span><br></pre></td></tr></table></figure>
+
+<p>写入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">su pi -c &#39;&#x2F;home&#x2F;pi&#x2F;.local&#x2F;bin&#x2F;jupyter-lab --no-browser&#39; &amp;</span><br></pre></td></tr></table></figure>
+
+<p>在exit 0前面</p>
+<p>或者以服务的形式自启动</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># sudo vim &#x2F;lib&#x2F;systemd&#x2F;system&#x2F;notebook.service</span><br><span class="line">[Unit]</span><br><span class="line">Description&#x3D;Notebook Demon</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">ExecStart&#x3D;&#x2F;home&#x2F;pi&#x2F;.local&#x2F;bin&#x2F;jupyter-lab</span><br><span class="line">RestartSec&#x3D;10s</span><br><span class="line">Restart&#x3D;always</span><br><span class="line">StandardOutput&#x3D;syslog</span><br><span class="line">StandardError&#x3D;syslog</span><br><span class="line">SyslogIdentifier&#x3D;jupyternotebooklog</span><br><span class="line">User&#x3D;pi</span><br><span class="line">Group&#x3D;pi</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy&#x3D;multi-user.target</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="安装nodejs"><a href="#安装nodejs" class="headerlink" title="安装nodejs"></a>安装nodejs</h2><p>如果需要 挂代理 很慢</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -sL https:&#x2F;&#x2F;deb.nodesource.com&#x2F;setup_14.x | sudo -E bash -</span><br><span class="line">sudo apt-get install -y nodejs</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="安装小控件"><a href="#安装小控件" class="headerlink" title="安装小控件"></a>安装小控件</h2><p>先打开jupyter lab的界面</p>
+<p>然后开启拓展</p>
+<p>如果需要 挂代理 很慢</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">pip3 install matplotlib</span><br><span class="line">pip3 install ipywidgets</span><br><span class="line">jupyter labextension install @jupyter-widgets/jupyterlab-manager@2.0 --no-build</span><br><span class="line">export NODE_OPTIONS=--max-old-space-size=2048</span><br><span class="line">jupyter lab build --dev-build=False --minimize=False</span><br></pre></td></tr></table></figure>
+
+<p>然后重启</p>
+<h2 id="配置串口"><a href="#配置串口" class="headerlink" title="配置串口"></a>配置串口</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim &#x2F;boot&#x2F;config.txt</span><br></pre></td></tr></table></figure>
+
+<p>写入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dtoverlay&#x3D;pi3-miniuart-bt</span><br></pre></td></tr></table></figure>
+
+<p>然后重启</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo reboot</span><br></pre></td></tr></table></figure>
+
+<h2 id="树莓派系统备份"><a href="#树莓派系统备份" class="headerlink" title="树莓派系统备份"></a>树莓派系统备份</h2><p>将搭建好树莓派环境的内存卡用读卡器插到电脑上 用Win32DiskImager进行全量备份</p>
+<p>然后将全量备份文件传到linux虚拟机上</p>
+<p>(必须为英文环境的虚拟机 不可以用经过国产汉化的deepin 会报错 也不可以使用WSL 推荐ubuntu)</p>
+<p>使用工具PiShrink进行裁剪</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Drewsif&#x2F;PiShrink&#x2F;master&#x2F;pishrink.sh</span><br><span class="line">chmod +x pishrink.sh</span><br><span class="line">.&#x2F;pishrink.sh rpi-back.img</span><br></pre></td></tr></table></figure>
+
+<p>裁剪后此文件变小 下载回来即可</p>
+<h3 id="tip"><a href="#tip" class="headerlink" title="tip"></a>tip</h3><p>树莓派处理图像切记不要在原分辨率(640x480)下处理</p>
+<p>至少长宽要缩小4倍</p>
+<p>面积缩小16倍(160x120)</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/RaspberryPi/" rel="tag"># RaspberryPi</a>
+              <a href="/tags/jupyterLab/" rel="tag"># jupyterLab</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/08/04/hexo-github%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" rel="prev" title="hexo+github博客搭建">
+      <i class="fa fa-chevron-left"></i> hexo+github博客搭建
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#树莓派环境搭建"><span class="nav-number">1.</span> <span class="nav-text">树莓派环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#写入镜像"><span class="nav-number">1.1.</span> <span class="nav-text">写入镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更新软件"><span class="nav-number">1.2.</span> <span class="nav-text">更新软件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#调节配置"><span class="nav-number">1.3.</span> <span class="nav-text">调节配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装opencv"><span class="nav-number">1.4.</span> <span class="nav-text">安装opencv</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装jupyterlab"><span class="nav-number">1.5.</span> <span class="nav-text">安装jupyterlab</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装nodejs"><span class="nav-number">1.6.</span> <span class="nav-text">安装nodejs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装小控件"><span class="nav-number">1.7.</span> <span class="nav-text">安装小控件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置串口"><span class="nav-number">1.8.</span> <span class="nav-text">配置串口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#树莓派系统备份"><span class="nav-number">1.9.</span> <span class="nav-text">树莓派系统备份</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#tip"><span class="nav-number">1.9.1.</span> <span class="nav-text">tip</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="星辰物语"
+      src="https://avatars3.githubusercontent.com/u/32411140?s=460&u=a2fd61c0415bce60d52d038fc137e75716c3c762&v=4">
+  <p class="site-author-name" itemprop="name">星辰物语</p>
+  <div class="site-description" itemprop="description">热爱研究各类电子技术</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/czstara12" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;czstara12" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:czstara12@qq.com" title="E-Mail → mailto:czstara12@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/290670428" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;290670428" rel="noopener" target="_blank"><i class=" fa-fw"></i>Bilibili</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://wpa.qq.com/msgrd?v=3&uin=1434304668&site=qq&menu=yes" title="QQ → http:&#x2F;&#x2F;wpa.qq.com&#x2F;msgrd?v&#x3D;3&amp;uin&#x3D;1434304668&amp;site&#x3D;qq&amp;menu&#x3D;yes" rel="noopener" target="_blank"><i class=" fa-fw"></i>QQ</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://baidu.com/" title="https:&#x2F;&#x2F;baidu.com" rel="noopener" target="_blank">Baidu</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://czstara12.github.io/" title="https:&#x2F;&#x2F;czstara12.github.io">招募友链 欢迎加入</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">豫ICP备20010076号 </a>
+      <img src="http://www.beian.gov.cn/portal/download" style="display: inline-block;">
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">星辰物语</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  },
+  svg: {
+    fontCache: 'global'
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
