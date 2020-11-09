@@ -58,8 +58,6 @@
   {%- endif %}
 </body>
 </html>
-<script type="text/javascript" src="//abbw.gitee.io/asset/js/click_love.js"></script>
-<script async src="//abbw.gitee.io/asset/js/canvas-nest.min.js" color="0,0,255" opacity='0.5' zIndex="-2" count="200"></script>
 <script>
 MathJax = {
   tex: {
