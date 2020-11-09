@@ -51,6 +51,14 @@ tags:
 
 [开源地址](https://github.com/czstara12/chaoxingpantool)
 
+## 注意
+
+超星云盘开有防盗链机制 导致放上去的图片链接网页中会加载不出来
+
+可以按照以下反防盗链方法
+
+https://www.playpi.org/2019042701.html
+
 ## 超星云盘直连分享技巧
 
 1. 登录[此网页](http://pan-yz.chaoxing.com/)
