@@ -19,7 +19,7 @@ tags:
 
 下载镜像https://www.raspberrypi.org/downloads/raspberry-pi-os/
 
-![下载界面(若图像无法加载 可访问原网站czstara12.github.io)](C:\Users\czsta\AppData\Roaming\Typora\typora-user-images\image-20200819163207784.png)
+![下载界面(若图像无法加载 可访问原网站czstara12.github.io)](http://d0.ananas.chaoxing.com/download/660c4842d08a9b297c458730c8a05d20?fn=image-20200819163207784)
 
 图为带桌面 不含软件
 
@@ -27,7 +27,7 @@ tags:
 
 格式化SDFormatter
 
-![SDFormatter界面(若图像无法加载 可访问原网站czstara12.github.io)](C:\Users\czsta\AppData\Roaming\Typora\typora-user-images\image-20200819163413163.png)
+![SDFormatter界面(若图像无法加载 可访问原网站czstara12.github.io)](http://d0.ananas.chaoxing.com/download/0e805e2dd24bf6c0fafbc737b8c945be?fn=image-20200819163413163)
 
 确定-确定
 
@@ -41,7 +41,7 @@ win32 disk imager
 
 点write(写入)
 
-![Win32 Disk Imager界面(若图像无法加载 可访问原网站czstara12.github.io)](C:\Users\czsta\AppData\Roaming\Typora\typora-user-images\image-20200819163836570.png)
+![Win32 Disk Imager界面(若图像无法加载 可访问原网站czstara12.github.io)](http://d0.ananas.chaoxing.com/download/75a600014962daa000e3fcdb2f36afe2?fn=image-20200819163836570)
 
 注意右上方的设备是否为要写入的设备
 
@@ -73,7 +73,7 @@ network={
 
 要求电脑连接上面配置文件所连接的wifi
 
-![](C:\Users\czsta\AppData\Roaming\Typora\typora-user-images\image-20200819165633434.png)
+![](http://d0.ananas.chaoxing.com/download/7a0dc76c4df886dda022d11471f5554c?fn=image-20200819165633434)
 
 弹出
 
@@ -85,13 +85,13 @@ Advanced IP Scanner
 
 扫描树莓派ip(如果可以进入路由器后台 可直接进入路由器后台查看)
 
-![image-20200819171028114](C:\Users\czsta\AppData\Roaming\Typora\typora-user-images\image-20200819171028114.png)
+![image-20200819171028114](http://d0.ananas.chaoxing.com/download/3910f0e1a67f3fdefae262fe3633f73c?fn=image-20200819171028114)
 
 可以看到
 
 使用ssh进行连接
 
-![image-20200819171146203](C:\Users\czsta\AppData\Roaming\Typora\typora-user-images\image-20200819171146203.png)
+![image-20200819171146203](http://d0.ananas.chaoxing.com/download/24dfd241084232c445e845a734735399?fn=image-20200819171146203)
 
 用户名
 
