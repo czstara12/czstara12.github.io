@@ -45,6 +45,8 @@ win32 disk imager
 
 注意右上方的设备是否为要写入的设备
 
+### 设置wifi网络连接
+
 完成后会出现一个名为boot的盘
 
 向其中写入一个名为ssh的空文件
@@ -75,13 +77,11 @@ network={
 
 ![](http://d0.ananas.chaoxing.com/download/7a0dc76c4df886dda022d11471f5554c?fn=image-20200819165633434)
 
-弹出
+(注意 如果文件建好后与上图图标不一样或者类型一类显示不一样 请尝试关闭windows的隐藏拓展名功能 然后再把名称改到与图中一致)
 
-将内存卡转移到树莓派上
+然后将内存卡插到树莓派上 并开机
 
-上电
-
-Advanced IP Scanner
+### Advanced IP Scanner
 
 扫描树莓派ip(如果可以进入路由器后台 可直接进入路由器后台查看)
 
@@ -90,6 +90,8 @@ Advanced IP Scanner
 可以看到
 
 使用ssh进行连接
+
+(此处使用的工具是MobaXterm也可以使用putty等SSH工具 请读者自行搜索下载)
 
 ![image-20200819171146203](http://d0.ananas.chaoxing.com/download/24dfd241084232c445e845a734735399?fn=image-20200819171146203)
 
@@ -332,3 +334,23 @@ chmod +x pishrink.sh
 至少长宽要缩小4倍
 
 面积缩小16倍(160x120)
+
+## 系统连接
+
+树莓派环境配置完毕后可以在电脑访问jupyter lab编程界面
+
+如果电脑支持mDNS服务 那就可以用浏览器直接访问
+
+```
+raspberry.local:8888
+```
+
+进入到编程界面
+
+或者找到树莓派的具体ip 然后访问
+
+```
+192.168.1.xxx.xxx(树莓派的IP):8888
+```
+
+进入编程界面
