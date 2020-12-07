@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+<meta name="referrer" content="no-referrer" />
+
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"czstara12.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="开源图床工具 超星云盘图床工具 配合typora使用超星云盘直连分享技巧">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图床">
+<meta property="og:url" content="http://czstara12.github.io/2020/04/12/%E8%B6%85%E6%98%9F%E5%9B%BE%E5%BA%8A/index.html">
+<meta property="og:site_name" content="星辰物语的编程分享">
+<meta property="og:description" content="开源图床工具 超星云盘图床工具 配合typora使用超星云盘直连分享技巧">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://pan-yz.chaoxing.com/download/downloadfile?fleid=456063588800507904&puid=81944713">
+<meta property="og:image" content="http://pan-yz.chaoxing.com/download/downloadfile?fleid=456063587126046720&puid=81944713">
+<meta property="og:image" content="http://pan-yz.chaoxing.com/download/downloadfile?fleid=456063591730757632&puid=81944713">
+<meta property="og:image" content="http://pan-yz.chaoxing.com/download/downloadfile?fleid=456063593429446656&puid=81944713">
+<meta property="og:image" content="http://pan-yz.chaoxing.com/download/downloadfile?fleid=457112030802071552&puid=81944713">
+<meta property="og:image" content="http://pan-yz.chaoxing.com/download/downloadfile?fleid=457112034192510976&puid=81944713">
+<meta property="og:image" content="http://pan-yz.chaoxing.com/download/downloadfile?fleid=456063670192164864&puid=81944713">
+<meta property="og:image" content="https://raw.githubusercontent.com/iplaypi/img-playpi/master/img/old/b7f2e3a3gy1g2hit3tj2sj20nn07eq3f.jpg">
+<meta property="og:image" content="http://pan-yz.chaoxing.com/download/downloadfile?fleid=457112037493428224&puid=81944713">
+<meta property="og:image" content="http://pan-yz.chaoxing.com/download/downloadfile?fleid=456067640161058816&puid=81944713">
+<meta property="og:image" content="http://pan-yz.chaoxing.com/download/downloadfile?fleid=456067641427558400&puid=81944713">
+<meta property="article:published_time" content="2020-04-12T12:12:37.000Z">
+<meta property="article:modified_time" content="2020-12-07T09:48:11.028Z">
+<meta property="article:author" content="星辰物语">
+<meta property="article:tag" content="图床">
+<meta property="article:tag" content="开源工具">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="爬虫">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://pan-yz.chaoxing.com/download/downloadfile?fleid=456063588800507904&puid=81944713">
+
+<link rel="canonical" href="http://czstara12.github.io/2020/04/12/%E8%B6%85%E6%98%9F%E5%9B%BE%E5%BA%8A/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>图床 | 星辰物语的编程分享</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">星辰物语的编程分享</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">starstory's programming sharing</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-list fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://czstara12.github.io/2020/04/12/%E8%B6%85%E6%98%9F%E5%9B%BE%E5%BA%8A/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/32411140?s=460&u=a2fd61c0415bce60d52d038fc137e75716c3c762&v=4">
+      <meta itemprop="name" content="星辰物语">
+      <meta itemprop="description" content="热爱研究各类电子技术">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="星辰物语的编程分享">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          图床
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-04-12 12:12:37" itemprop="dateCreated datePublished" datetime="2020-04-12T12:12:37+00:00">2020-04-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-12-07 09:48:11" itemprop="dateModified" datetime="2020-12-07T09:48:11+00:00">2020-12-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/other/" itemprop="url" rel="index"><span itemprop="name">other</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>开源图床工具 超星云盘图床工具 配合typora使用<br>超星云盘直连分享技巧</p>
+<a id="more"></a>
+<h1 id="开源图床工具-超星云盘图床工具-配合typora使用"><a href="#开源图床工具-超星云盘图床工具-配合typora使用" class="headerlink" title="开源图床工具 超星云盘图床工具 配合typora使用"></a>开源图床工具 超星云盘图床工具 配合typora使用</h1><ol>
+<li><p>下载<a href="http://d0.ananas.chaoxing.com/download/2906b5aacdac0d6055d9745aae999c17?fn=chaoxingcolud" target="_blank" rel="noopener">此工具</a> 并<a href="https://passport2.chaoxing.com/register3?refer=http%3A%2F%2Fpan-yz.chaoxing.com%2F" target="_blank" rel="noopener">在此</a>注册超星账号</p>
+</li>
+<li><p>放到任意目录下(此处以D:\GreenSoftware\pyfigerbed为例)</p>
+</li>
+</ol>
+<p><img src="http://pan-yz.chaoxing.com/download/downloadfile?fleid=456063588800507904&puid=81944713" alt="image-20200412114031972"></p>
+<ol start="3">
+<li>打开typora-&gt;文件-&gt;偏好设置</li>
+</ol>
+<p><img src="http://pan-yz.chaoxing.com/download/downloadfile?fleid=456063587126046720&puid=81944713" alt="image-20200412114235308"></p>
+<ol start="4">
+<li>图像-&gt;上传服务-&gt;Custom Command</li>
+</ol>
+<p><img src="http://pan-yz.chaoxing.com/download/downloadfile?fleid=456063591730757632&puid=81944713" alt="image-20200412114338827"></p>
+<ol start="5">
+<li>自定义命令栏-&gt;输入工具所在的位置</li>
+</ol>
+<p><img src="http://pan-yz.chaoxing.com/download/downloadfile?fleid=456063593429446656&puid=81944713" alt="image-20200412114523079"></p>
+<ol start="6">
+<li><p>点”验证图片上传选项” 弹出登录窗口 </p>
+<p><img src="http://pan-yz.chaoxing.com/download/downloadfile?fleid=457112030802071552&puid=81944713" alt="image-20200415091842809"></p>
+</li>
+</ol>
+<ol start="7">
+<li>大功告成 你可以用一个markdown文件测试</li>
+</ol>
+<p><img src="http://pan-yz.chaoxing.com/download/downloadfile?fleid=457112034192510976&puid=81944713" alt="image-20200415091916716"></p>
+<p>成功</p>
+<p><img src="http://pan-yz.chaoxing.com/download/downloadfile?fleid=456063670192164864&puid=81944713" alt="image-20200412115405092"></p>
+<p><a href="https://github.com/czstara12/chaoxingpantool" target="_blank" rel="noopener">开源地址</a></p>
+<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p>超星云盘开有防盗链机制 导致放上去的图片链接网页中会加载不出来</p>
+<p>可以按照以下反防盗链方法</p>
+<p><a href="https://www.playpi.org/2019042701.html" target="_blank" rel="noopener">https://www.playpi.org/2019042701.html</a></p>
+<h2 id="反防盗链"><a href="#反防盗链" class="headerlink" title="反防盗链"></a>反防盗链</h2><blockquote>
+<p>清除 Referer 参数</p>
+<h2 id="尝试清除来源引用"><a href="#尝试清除来源引用" class="headerlink" title="尝试清除来源引用"></a>尝试清除来源引用</h2><p>在静态网页的 <strong>头部</strong> 代码中【即 head 标记】添加如下配置项：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta name&#x3D;&quot;referrer&quot; content&#x3D;&quot;no-referrer&quot; &#x2F;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>它的作用就是阻止浏览器发送 <strong>Referer</strong> 信息，对整个页面的所有链接生效【当然也有针对单个链接设置的方法：<a rel="noreferrer" href="your-website-url" />，这里不采用】，这样一来微博图床就不知道请求的引用来源了，可以达到和直接在浏览器中访问一样的效果。 <strong>但是要注意，不是每种浏览器都支持这种语法的，此设置对有的浏览器来说无效。</strong></p>
+<p>那么在 Hexo 框架中怎么增加呢，显然不会有相关配置项，只能更改源代码，而且使用了 Next 主题，应该要更改主题的源代码，以保证 Hexo 在渲染静态页面为每个页面都增加这个配置。查阅文档，了解了渲染模板所在位置，打开 <strong>themes/next/layout/_partials/head.swig</strong> 文件，在里面添加 meta 标记就行。</p>
+<p><img src="https://raw.githubusercontent.com/iplaypi/img-playpi/master/img/old/b7f2e3a3gy1g2hit3tj2sj20nn07eq3f.jpg" alt="修改 head.swig 文件"></p>
+<p>修改 head.swig 文件</p>
+</blockquote>
+<h2 id="超星云盘直连分享技巧"><a href="#超星云盘直连分享技巧" class="headerlink" title="超星云盘直连分享技巧"></a>超星云盘直连分享技巧</h2><ol>
+<li>登录<a href="http://pan-yz.chaoxing.com/" target="_blank" rel="noopener">此网页</a></li>
+</ol>
+<p><img src="http://pan-yz.chaoxing.com/download/downloadfile?fleid=457112037493428224&puid=81944713" alt="image-20200415091941274"></p>
+<ol start="2">
+<li>找到要分享的文件 点下载</li>
+</ol>
+<p><img src="http://pan-yz.chaoxing.com/download/downloadfile?fleid=456067640161058816&puid=81944713" alt="image-20200412120554280"></p>
+<ol start="3">
+<li>在下载记录或下载窗口里复制对应的下载链接</li>
+</ol>
+<p><img src="http://pan-yz.chaoxing.com/download/downloadfile?fleid=456067641427558400&puid=81944713" alt="image-20200412120807786"></p>
+<ol start="4">
+<li>此链接可以直接分享 下载方不需登录超星账号</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%9B%BE%E5%BA%8A/" rel="tag"># 图床</a>
+              <a href="/tags/%E5%BC%80%E6%BA%90%E5%B7%A5%E5%85%B7/" rel="tag"># 开源工具</a>
+              <a href="/tags/python/" rel="tag"># python</a>
+              <a href="/tags/%E7%88%AC%E8%99%AB/" rel="tag"># 爬虫</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/12/linux_screen/" rel="prev" title="GNU Screen">
+      <i class="fa fa-chevron-left"></i> GNU Screen
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/08/04/Robocopy/" rel="next" title="Robocopy">
+      Robocopy <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#开源图床工具-超星云盘图床工具-配合typora使用"><span class="nav-number">1.</span> <span class="nav-text">开源图床工具 超星云盘图床工具 配合typora使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#注意"><span class="nav-number">1.1.</span> <span class="nav-text">注意</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反防盗链"><span class="nav-number">1.2.</span> <span class="nav-text">反防盗链</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#尝试清除来源引用"><span class="nav-number">1.3.</span> <span class="nav-text">尝试清除来源引用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#超星云盘直连分享技巧"><span class="nav-number">1.4.</span> <span class="nav-text">超星云盘直连分享技巧</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="星辰物语"
+      src="https://avatars3.githubusercontent.com/u/32411140?s=460&u=a2fd61c0415bce60d52d038fc137e75716c3c762&v=4">
+  <p class="site-author-name" itemprop="name">星辰物语</p>
+  <div class="site-description" itemprop="description">热爱研究各类电子技术</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/czstara12" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;czstara12" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:czstara12@qq.com" title="E-Mail → mailto:czstara12@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/290670428" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;290670428" rel="noopener" target="_blank"><i class=" fa-fw"></i>Bilibili</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://wpa.qq.com/msgrd?v=3&uin=1434304668&site=qq&menu=yes" title="QQ → http:&#x2F;&#x2F;wpa.qq.com&#x2F;msgrd?v&#x3D;3&amp;uin&#x3D;1434304668&amp;site&#x3D;qq&amp;menu&#x3D;yes" rel="noopener" target="_blank"><i class=" fa-fw"></i>QQ</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://baidu.com/" title="https:&#x2F;&#x2F;baidu.com" rel="noopener" target="_blank">Baidu</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://czstara12.github.io/" title="https:&#x2F;&#x2F;czstara12.github.io">招募友链 欢迎加入</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">豫ICP备20010076号 </a>
+      <img src="http://www.beian.gov.cn/portal/download" style="display: inline-block;">
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">星辰物语</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  },
+  svg: {
+    fontCache: 'global'
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
