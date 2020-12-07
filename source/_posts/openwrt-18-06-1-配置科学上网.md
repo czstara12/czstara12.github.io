@@ -63,3 +63,15 @@ opkg install shadowsocks-libev-config shadowsocks-libev-ss-local shadowsocks-lib
 cd /tmp && opkg update && opkg install curl ca-bundle && curl -s -L https://github.com/ysy/ss/raw/master/openwrt_tproxy.tgz -ot.tgz && tar x -z -f t.tgz && cd openwrt_tproxy && ./setup.sh
 ```
 
+## 4.编译
+
+目前lede代码下载下来配置界面是没有ss包的选项的 需要更改feeds.conf.default文件 将最后一行前面的#去掉
+
+然后
+
+```sh
+./scripts/feeds update -a
+./scripts/feeds install -a
+make menuconfig
+```
+

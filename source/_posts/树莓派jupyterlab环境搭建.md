@@ -9,13 +9,13 @@ tags:
 - jupyterLab
 ---
 
-# 树莓派环境搭建
-
 本文介绍了树莓派web python(jupyterLab)运行环境的搭建方法
 
 以及对应的批量制作时的备份镜像方法
 
 <!-- more -->
+
+# 树莓派环境搭建
 
 下载镜像https://www.raspberrypi.org/downloads/raspberry-pi-os/
 

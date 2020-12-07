@@ -4,7 +4,7 @@ date: 2020-04-12 12:12:37
 categories:
 - linux
 tags:
-- linux
+- linux screen
 ---
 
 GNU Screen
