@@ -180,7 +180,7 @@ sudo apt-get install python3-opencv
 
 ## 安装jupyterlab
 
-服务器在国外 网络不好建议使用代理
+配置代理服务器
 
 ```
 export http_proxy='http://127.0.0.1:7890'
@@ -264,8 +264,6 @@ WantedBy=multi-user.target
 
 ## 安装nodejs
 
-如果需要 挂代理 很慢
-
 ```
 curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
 sudo apt-get install -y nodejs
@@ -278,8 +276,6 @@ sudo apt-get install -y nodejs
 先打开jupyter lab的界面
 
 然后开启拓展
-
-如果需要 挂代理 很慢
 
 ```shell
 pip3 install matplotlib
