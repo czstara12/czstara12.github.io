@@ -30,14 +30,14 @@
 <meta property="og:site_name" content="星辰物语的编程分享">
 <meta property="og:description" content="本文记录SSH秘钥生成与linux免密登陆的操作步骤">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://d0.ananas.chaoxing.com/download/f6fea8dd7d7901ce9ec41f277dad7e2b?fn=image-20200904192859880">
-<meta property="og:image" content="http://d0.ananas.chaoxing.com/download/28449c7cab3519b39c96567589dc9ed8?fn=image-20200904193409065">
+<meta property="og:image" content="http://d0.ananas.chaoxing.com/download/05bd91008745df5e6659769ce69547dc?at_=1614648192340&ak_=42b68aa5c108d56e98fe264c9d5ea9e5&ad_=e019efb6e113b184e7f7429959319b05&fn=image-20210302092308744">
+<meta property="og:image" content="http://d0.ananas.chaoxing.com/download/5589bcc71869d8094ebe95dd28c79418?at_=1614648217108&ak_=3e57a37b6778e74287dc47f7f676d03c&ad_=9963e5027a806f77c2c7fdcc2bec3ff5&fn=image-20210302092335223">
 <meta property="article:published_time" content="2020-11-24T16:52:43.000Z">
-<meta property="article:modified_time" content="2021-03-02T00:52:00.505Z">
+<meta property="article:modified_time" content="2021-03-02T01:40:41.924Z">
 <meta property="article:author" content="星辰物语">
 <meta property="article:tag" content="SSH">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://d0.ananas.chaoxing.com/download/f6fea8dd7d7901ce9ec41f277dad7e2b?fn=image-20200904192859880">
+<meta name="twitter:image" content="http://d0.ananas.chaoxing.com/download/05bd91008745df5e6659769ce69547dc?at_=1614648192340&ak_=42b68aa5c108d56e98fe264c9d5ea9e5&ad_=e019efb6e113b184e7f7429959319b05&fn=image-20210302092308744">
 
 <link rel="canonical" href="http://czstara12.github.io/2020/11/24/ssh-key%E6%B7%BB%E5%8A%A0%E6%96%B9%E6%B3%95/">
 
@@ -203,7 +203,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-02 00:52:00" itemprop="dateModified" datetime="2021-03-02T00:52:00+00:00">2021-03-02</time>
+                <time title="修改时间：2021-03-02 01:40:41" itemprop="dateModified" datetime="2021-03-02T01:40:41+00:00">2021-03-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -258,7 +258,7 @@
 <p>RSA格式如下</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">-----BEGIN RSA PRIVATE KEY-----</span><br><span class="line">MIIEoQIBAAKCAQEAqXpPr867&#x2F;R4hIUxQQHWIZJRYFNR9YibHYM96oYPaJ+rlAhcU</span><br><span class="line">q3GJbqFEsUvAdNQ+V9Jlg7NHVlBgue8Jxt2xH02xJc3+g9Xpdnii1IUqkqNHkkNf</span><br><span class="line">glpSjiC42JDqHmjaGFo&#x2F;7ESHqOt9+YbaVo969&#x2F;W&#x2F;gW+sp87lUMO&#x2F;E9ExK7YT3fH&#x2F;</span><br><span class="line">qGublN9faHsew+hu3wEF&#x2F;z1S67LotGGBp4&#x2F;&#x2F;sLzTK6rLWoQYQpk3zA9xWtl&#x2F;nJrO</span><br><span class="line">SmhKRdSUPIk32&#x2F;NRj&#x2F;2mzqyPTIsdTjffdlrCBqhCPWlTpAe12JFyAyytlB1R+cpp</span><br><span class="line">Qnb0wihmmyx+s7U0NVEA0N05wQmyFsn1O+608wIBJQKCAQBAIHEtw9htnLKW+kfh</span><br><span class="line">CeCUwoIxZSiGANXRmp0ahOrC&#x2F;u7eMj8sHR8+neKj8yY6Cx6CGEIWKCjUjR2uIxh0</span><br><span class="line">wpYL2DUw5ijznQw6qi&#x2F;GCN+tGy&#x2F;Welt9bkjAKA6XIhNlc8gk4+DV8GqunktXfyIu</span><br><span class="line">lyecF8vryWPsd8xjv7AVVhKa6lUasUaOAjPVbb8dVIw+uPgQ30ujUkYpprYirjtr</span><br><span class="line">9oE3ju69&#x2F;WpFqPZya7YKID47sF9L2BQurFduaSN0UwZYk6wBgrwvKbuNHXOgatvg</span><br><span class="line">fcXk2154tYZlra1kiAIwXcQYDXlrVD&#x2F;qC8kQu4X+LO&#x2F;eh4tzyIcbAkrXIFpdBWSc</span><br><span class="line">6c0dAoGBANRKMY7ClimubwtRrWoKrqAQWtmBaiRZzhQI9bMT+ah2vgsMOAs9Savn</span><br><span class="line">sB7GsBa1aiQQNW2pr7&#x2F;z3PyBSwTgUNiETYM9aVrlv0zZ3pISDNCKoptXEDy&#x2F;qRDy</span><br><span class="line">XoQpKrvQK4vCgvZG+c5X7GyMC919MIwpY1gCyXvDZSZK+zr10dFfAoGBAMxffjZu</span><br><span class="line">hnsyYJHbktRcmhqiDuSXVSv&#x2F;PoWY6HqtHSZLu+NyeZT3aZfjXrfqnG0Hr4RD83Ru</span><br><span class="line">g1ob4boH0H2j0w3jH8SCVOlNRx7erJqTAYsM5nZeMDOzE6PKOTE1nGuEYHMJVoDs</span><br><span class="line">XgC+AzyBqd4hQwCjEoziH&#x2F;gyzwqxZQvL&#x2F;CDtAoGAW80OguxcnGcbQyo9Ju&#x2F;cz5he</span><br><span class="line">oz7hyoezD5Ur+mmAt41LQwwz6S9Cc9nPnpsbtsr9d2D0gnLkN1SylrRzd7ryhyR0</span><br><span class="line">i8eHgUDBbVdLfW+W1rh9qvU3dDc0Wlr4cICBLp81bN590kg0rEGyWHPpdIkpwBHl</span><br><span class="line">xTGjPHArvYg1Se3ChA0CgYBHzoZKedw5H4m2tO5mSgyhkuKjV8P6s6BYc&#x2F;6npJuJ</span><br><span class="line">&#x2F;u784wgflTLwLUrK&#x2F;2dkk&#x2F;9l0q9773pCQSXLvY5xVTxQ&#x2F;MX474WeFDuVOXrqM6aY</span><br><span class="line">o6rrUYaOtIpcJHT1nTb1WAY2QY0YimY3nLUHa9PmQwm0HZ674L8f2oAYg4ReFzzo</span><br><span class="line">+QKBgQDAT4E9j0C6BtQ8WOqL077qnK36yR6OCaw&#x2F;o3wCN1hRh6uYvEQt&#x2F;OON60pc</span><br><span class="line">XwfEIMky3TSTsmo8mPw&#x2F;N1TdFhBMepub&#x2F;OJ0JG8VK73p6HnWUfxgQ4rnkvSuCes7</span><br><span class="line">&#x2F;0LkvdFmMtYGu6RpdiA3hhSSmFCX66dlywhhhTncYXseMw2tDQ&#x3D;&#x3D;</span><br><span class="line">-----END RSA PRIVATE KEY-----</span><br></pre></td></tr></table></figure>
 
-<h2 id="使用puttygen创建和转换秘钥"><a href="#使用puttygen创建和转换秘钥" class="headerlink" title="使用puttygen创建和转换秘钥"></a>使用puttygen创建和转换秘钥</h2><p><img src="http://d0.ananas.chaoxing.com/download/f6fea8dd7d7901ce9ec41f277dad7e2b?fn=image-20200904192859880" alt="image-20200904192859880"></p>
+<h2 id="使用puttygen创建和转换秘钥"><a href="#使用puttygen创建和转换秘钥" class="headerlink" title="使用puttygen创建和转换秘钥"></a>使用puttygen创建和转换秘钥</h2><p><img src="http://d0.ananas.chaoxing.com/download/05bd91008745df5e6659769ce69547dc?at_=1614648192340&ak_=42b68aa5c108d56e98fe264c9d5ea9e5&ad_=e019efb6e113b184e7f7429959319b05&fn=image-20210302092308744" alt="image-20210302092308744"></p>
 <p>点击Generate生成秘钥对</p>
 <p>点击Save public key保存公钥</p>
 <p>格式为多行格式 需要转换为单行格式 也可以直接从上面的大框中复制 为单行格式 直接复制到文本文件即可</p>
@@ -266,7 +266,7 @@
 <p>生成的格式为.ppk格式 可以读入到puttygen中进一步转换</p>
 <h4 id="读取后转换"><a href="#读取后转换" class="headerlink" title="读取后转换"></a>读取后转换</h4><p>OpenSSH key为老版本RSA格式</p>
 <p>OpenSSH key(force new file format)为新版本OPENSSH格式</p>
-<p><img src="http://d0.ananas.chaoxing.com/download/28449c7cab3519b39c96567589dc9ed8?fn=image-20200904193409065" alt="image-20200904193409065"></p>
+<p><img src="http://d0.ananas.chaoxing.com/download/5589bcc71869d8094ebe95dd28c79418?at_=1614648217108&ak_=3e57a37b6778e74287dc47f7f676d03c&ad_=9963e5027a806f77c2c7fdcc2bec3ff5&fn=image-20210302092335223" alt="image-20210302092335223"></p>
 
     </div>
 
