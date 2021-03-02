@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+<meta name="referrer" content="no-referrer" />
+
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"czstara12.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="小车运动参数计算用于计算一般车模控制模型的计算">
+<meta property="og:type" content="article">
+<meta property="og:title" content="小车运动参数计算">
+<meta property="og:url" content="http://czstara12.github.io/2021/03/02/%E5%B0%8F%E8%BD%A6%E8%BF%90%E5%8A%A8%E5%8F%82%E6%95%B0%E8%AE%A1%E7%AE%97/index.html">
+<meta property="og:site_name" content="星辰物语的编程分享">
+<meta property="og:description" content="小车运动参数计算用于计算一般车模控制模型的计算">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://d0.ananas.chaoxing.com/download/1433ad6e027981c77bb54ed7bdb1fcbe?at_=1614414122691&ak_=85d8a546e7ddd3528acc8ddebab75b83&ad_=9334d238783cac7e4a979d829ebedf59&fn=image-20210227093504317">
+<meta property="og:image" content="http://d0.ananas.chaoxing.com/download/aa8f40b2d18574543c2d6a67bca6f5a1?at_=1614414125600&ak_=9334b951279ac9088d5cf88f23496432&ad_=6167bf354b84673d8051664fcad0688f&fn=image-20210227093532861">
+<meta property="og:image" content="http://d0.ananas.chaoxing.com/download/1449e2a1300b2336757332e98fe24fbf?at_=1614414126578&ak_=9d0b9e0fc04227038bd65cde84b54909&ad_=bd5960d20b3ef3b9408829167399d1be&fn=image-20210227120238971">
+<meta property="og:image" content="http://d0.ananas.chaoxing.com/download/f8d94c14c5d1242ce8d704667d2618be?at_=1614414127974&ak_=98f98a1f3050e3168826499d7b4cbabb&ad_=72c51866283cdf90226ad55ed68958c4&fn=image-20210227115616322">
+<meta property="og:image" content="http://d0.ananas.chaoxing.com/download/ba0b7932deeed101d4cdb84bae046dbc?at_=1614414128463&ak_=f5e2e03379e9a1fd3d3fae80c3b82fa5&ad_=3eddc0b3d2a5e32145c2103372299c58&fn=image-20210227115632206">
+<meta property="og:image" content="http://d0.ananas.chaoxing.com/download/d9c1094e0d0131ef381d1eb888536848?at_=1614414129211&ak_=06ef6e12926973b907708e15e606a2f1&ad_=08d3fada8b29c7ddb6bc1a9b83426390&fn=image-20210227154500951">
+<meta property="og:image" content="http://d0.ananas.chaoxing.com/download/4a0d3d52497c9a1503f370e6d86f4340?at_=1614414129870&ak_=dbf733a3e861d814ca9448626414c259&ad_=503bea03ba002c69ecc86d45d21a5659&fn=image-20210227161143782">
+<meta property="og:image" content="http://d0.ananas.chaoxing.com/download/f91badfba7760f03f093a10ce5c71b59?at_=1614414130578&ak_=837d3faaa3219fa0e379504499579db4&ad_=d6eafdb82c29562746e7ea02739bfdf7&fn=image-20210227161032801">
+<meta property="og:image" content="http://d0.ananas.chaoxing.com/download/83624e8a7cd3404b2907ce91d774056f?at_=1614418491413&ak_=c284db56fcb8fb4d3a589bb6e670acbf&ad_=2c755e21ddd72429fba39ac56d34f27d&fn=image-20210227173443647">
+<meta property="article:published_time" content="2021-03-02T08:46:58.000Z">
+<meta property="article:modified_time" content="2021-03-02T00:52:00.505Z">
+<meta property="article:author" content="星辰物语">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="smart car">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://d0.ananas.chaoxing.com/download/1433ad6e027981c77bb54ed7bdb1fcbe?at_=1614414122691&ak_=85d8a546e7ddd3528acc8ddebab75b83&ad_=9334d238783cac7e4a979d829ebedf59&fn=image-20210227093504317">
+
+<link rel="canonical" href="http://czstara12.github.io/2021/03/02/%E5%B0%8F%E8%BD%A6%E8%BF%90%E5%8A%A8%E5%8F%82%E6%95%B0%E8%AE%A1%E7%AE%97/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>小车运动参数计算 | 星辰物语的编程分享</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">星辰物语的编程分享</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">starstory's programming sharing</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-list fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://czstara12.github.io/2021/03/02/%E5%B0%8F%E8%BD%A6%E8%BF%90%E5%8A%A8%E5%8F%82%E6%95%B0%E8%AE%A1%E7%AE%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/32411140?s=460&u=a2fd61c0415bce60d52d038fc137e75716c3c762&v=4">
+      <meta itemprop="name" content="星辰物语">
+      <meta itemprop="description" content="热爱研究各类电子技术">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="星辰物语的编程分享">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          小车运动参数计算
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-03-02 08:46:58 / 修改时间：00:52:00" itemprop="dateCreated datePublished" datetime="2021-03-02T08:46:58+00:00">2021-03-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="小车运动参数计算"><a href="#小车运动参数计算" class="headerlink" title="小车运动参数计算"></a>小车运动参数计算</h1><p>用于计算一般车模控制模型的计算</p>
+<a id="more"></a>
+
+<p>编码器每轮783计数</p>
+<p>轮子周长 0.2m</p>
+<p>编码器计时周期 30ms</p>
+<p>编码器长度换算 编码器值/4000 m</p>
+<p>编码器速度换算 编码器值/4000/0.03 m/s</p>
+<p>后轮轴长0.16m</p>
+<p>前后轮差0.19m</p>
+<h2 id="1-后轮电子差速"><a href="#1-后轮电子差速" class="headerlink" title="1.后轮电子差速"></a>1.后轮电子差速</h2><p>后轮两个轮子分别使用两个编码器电机 通过pid算法可以精确的控制电机转速</p>
+<p>车模在转弯时 两个后轮走过的路程不一致 因此需要差速控制 一般汽车上有专业的机械差速器控制差速</p>
+<p>差速算法以后再补</p>
+<h2 id="2-前轮角度控制"><a href="#2-前轮角度控制" class="headerlink" title="2.前轮角度控制"></a>2.前轮角度控制</h2><p>对于一些车模来说 前轮是有一个舵机带动 而舵机的角度又是会和前轮偏转角度呈一个复杂关系 有的车模控制程序简单的用一个线性关系去解算 会导致误差较大 对舵机连杆进行建模 然后通过运动学求解析解就可以得到一个良好的控制模型式</p>
+<p>这是我们的控制模型 一般来说 分为以下两种 先考虑第二种</p>
+<p><img src="http://d0.ananas.chaoxing.com/download/1433ad6e027981c77bb54ed7bdb1fcbe?at_=1614414122691&ak_=85d8a546e7ddd3528acc8ddebab75b83&ad_=9334d238783cac7e4a979d829ebedf59&fn=image-20210227093504317" alt="image-20210227093504317"></p>
+<p><img src="http://d0.ananas.chaoxing.com/download/aa8f40b2d18574543c2d6a67bca6f5a1?at_=1614414125600&ak_=9334b951279ac9088d5cf88f23496432&ad_=6167bf354b84673d8051664fcad0688f&fn=image-20210227093532861" alt="image-20210227093532861"></p>
+<p>控制原理</p>
+<p><img src="http://d0.ananas.chaoxing.com/download/1449e2a1300b2336757332e98fe24fbf?at_=1614414126578&ak_=9d0b9e0fc04227038bd65cde84b54909&ad_=bd5960d20b3ef3b9408829167399d1be&fn=image-20210227120238971" alt="image-20210227120238971"></p>
+<p>二维绘图</p>
+<p><img src="http://d0.ananas.chaoxing.com/download/f8d94c14c5d1242ce8d704667d2618be?at_=1614414127974&ak_=98f98a1f3050e3168826499d7b4cbabb&ad_=72c51866283cdf90226ad55ed68958c4&fn=image-20210227115616322" alt="image-20210227115616322"></p>
+<p>此处AB=i 图画i/j不清楚 此处绘制$z_C=z_D=0$实际也可不为零(见下文)</p>
+<p><img src="http://d0.ananas.chaoxing.com/download/ba0b7932deeed101d4cdb84bae046dbc?at_=1614414128463&ak_=f5e2e03379e9a1fd3d3fae80c3b82fa5&ad_=3eddc0b3d2a5e32145c2103372299c58&fn=image-20210227115632206" alt="image-20210227115632206"></p>
+<p>其中 圆A和圆D的位置确定 圆心和半径可以测量出来 j的长度确定</p>
+<p>因此 B和C满足距离公式<br>$$<br>(x_B-x_C)^2+(y_B-y_C)^2+(z_B-z_C)^2=j^2①<br>$$<br>同时 B和C分别满足圆的公式<br>$$<br>x_B^2+z_B^2=i^2②\<br>y_A=y_B=0(坐标原点设定在A上)\<br>(x_C-x_D)^2+(y_C-y_D)^2=k^2③\<br>z_C=z_D<br>$$<br>将①展开 分别减去②和③ 并带入已知条件 可得下式<br>$$<br>z_D^2-2x_Bx_C-2z_Bz_C-x_D^2-y_D^2+2x_Cx_D+2y_Cy_D=j^2-k^2-i^2\<br>2x_Bx_C+2z_Bz_C=i^2-j^2+k^2-x_D^2-y_D^2+z_D^2+2x_Cx_D+2y_Cy_D<br>$$<br>如下图做辅助线</p>
+<p><img src="http://d0.ananas.chaoxing.com/download/d9c1094e0d0131ef381d1eb888536848?at_=1614414129211&ak_=06ef6e12926973b907708e15e606a2f1&ad_=08d3fada8b29c7ddb6bc1a9b83426390&fn=image-20210227154500951" alt="image-20210227154500951"><br>$$<br>x_C=-l\cos(a)\<br>z_C=l\sin(a)\<br>l=\sqrt{x_C^2+z_C^2}\<br>x_B=i\sin(b)\<br>z_B=i\cos(b)<br>$$<br>带入上式<br>$$<br>2il\sin(a)\cos(b)-2il\cos(a)\sin(b)=i^2-j^2+k^2-x_D^2-y_D^2+z_D^2+2x_Cx_D+2y_Cy_D\<br>\sin(a-b)=\frac{i^2-j^2+k^2-x_D^2-y_D^2+z_D^2+2x_Cx_D+2y_Cy_D}{2il}\<br>b=a-\arcsin(\frac{i^2-j^2+k^2-x_D^2-y_D^2+z_D^2+2x_Cx_D+2y_Cy_D}{2il})<br>$$<br>其中<br>$$<br>x_C=x_D+k\sin(c)\<br>y_C=y_D-k\cos(c)\<br>z_C=z_D\<br>a=\arctan(z_C/x_C)\<br>d-e=c<br>$$<br><img src="http://d0.ananas.chaoxing.com/download/4a0d3d52497c9a1503f370e6d86f4340?at_=1614414129870&ak_=dbf733a3e861d814ca9448626414c259&ad_=503bea03ba002c69ecc86d45d21a5659&fn=image-20210227161143782" alt="image-20210227161143782"></p>
+<p>e是轮子的偏转角</p>
+<p>d是轮子偏转角为0时 k与y轴负半轴的夹角 是结构自带的角度</p>
+<p><img src="http://d0.ananas.chaoxing.com/download/f91badfba7760f03f093a10ce5c71b59?at_=1614414130578&ak_=837d3faaa3219fa0e379504499579db4&ad_=d6eafdb82c29562746e7ea02739bfdf7&fn=image-20210227161032801" alt="image-20210227161032801"></p>
+<h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h3><p>爷烦了 不写了 直接贴代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Spyder Editor</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">This is a temporary script file.</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">i=<span class="number">0.02</span></span><br><span class="line"><span class="comment">#r2=0</span></span><br><span class="line">k_y=<span class="number">0.024</span><span class="comment">#y方向长</span></span><br><span class="line">k_x=<span class="number">0.0045</span><span class="comment">#x方向长</span></span><br><span class="line">k_z=<span class="number">0</span><span class="comment">#z方向长</span></span><br><span class="line">k=math.sqrt(k_x**<span class="number">2</span>+k_y**<span class="number">2</span>+k_z**<span class="number">2</span>)</span><br><span class="line">A=(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>)</span><br><span class="line">D_x=<span class="number">-0.063</span></span><br><span class="line">D_y=<span class="number">0.034</span></span><br><span class="line">D_z=<span class="number">0</span></span><br><span class="line">D=(D_x,D_y,D_z) </span><br><span class="line"></span><br><span class="line">C_x_0=D_x+k_x<span class="comment">#零位置坐标</span></span><br><span class="line">C_y_0=D_y-k_y</span><br><span class="line">C_z_0=D_z-k_z</span><br><span class="line">B_x_0=<span class="number">0</span></span><br><span class="line">B_y_0=<span class="number">0</span></span><br><span class="line">B_z_0=i</span><br><span class="line"></span><br><span class="line">j=math.sqrt((C_x_0-B_x_0)**<span class="number">2</span>+(C_y_0-B_y_0)**<span class="number">2</span>+(C_z_0-B_z_0)**<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">d=math.atan(k_x/k_y)</span><br><span class="line"></span><br><span class="line">li=np.zeros(shape=(<span class="number">10001</span>,<span class="number">2</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> tmp <span class="keyword">in</span> range(<span class="number">-5000</span>,<span class="number">5001</span>,<span class="number">1</span>):</span><br><span class="line">    e=tmp/<span class="number">100</span>/<span class="number">180</span>*math.pi</span><br><span class="line">    c=d-e</span><br><span class="line">    C_x=D_x+math.sin(c)*k</span><br><span class="line">    C_y=D_y-math.cos(c)*k</span><br><span class="line">    C_z=D_z</span><br><span class="line">    a=math.atan(C_z/C_x)</span><br><span class="line">    l=math.sqrt(C_x**<span class="number">2</span>+C_z**<span class="number">2</span>)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        b=a-math.asin((i**<span class="number">2</span>-j**<span class="number">2</span>+k**<span class="number">2</span>-D_x**<span class="number">2</span>-D_y**<span class="number">2</span>+D_z**<span class="number">2</span>+<span class="number">2</span>*C_x*D_x+<span class="number">2</span>*C_y*D_y)/(<span class="number">2</span>*i*l))</span><br><span class="line">        </span><br><span class="line">        li[tmp+<span class="number">5000</span>,<span class="number">0</span>]=e</span><br><span class="line">        li[tmp+<span class="number">5000</span>,<span class="number">1</span>]=b/math.pi*<span class="number">2000</span></span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        print(<span class="string">'err'</span>)</span><br><span class="line">    <span class="comment">#li.append((tmp/100,b/math.pi*180))</span></span><br><span class="line">print(<span class="string">'ok'</span>)</span><br><span class="line">    </span><br><span class="line">drawx=li[:,<span class="number">0</span>]</span><br><span class="line">drawy=li[:,<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"> </span><br><span class="line"><span class="comment">#创建绘图图表对象，可以不显式创建，跟cv2中的cv2.namedWindow()用法差不多</span></span><br><span class="line">plt.figure(<span class="string">'Draw'</span>)</span><br><span class="line"> </span><br><span class="line">plt.plot(drawy,drawx)</span><br><span class="line"> </span><br><span class="line">plt.draw()</span><br></pre></td></tr></table></figure>
+
+<p>运行结果</p>
+<p><img src="http://d0.ananas.chaoxing.com/download/83624e8a7cd3404b2907ce91d774056f?at_=1614418491413&ak_=c284db56fcb8fb4d3a589bb6e670acbf&ad_=2c755e21ddd72429fba39ac56d34f27d&fn=image-20210227173443647" alt="image-20210227173443647"></p>
+<p>在中间很长一段都有非常好的线性近似 直接做个线性就行</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/python/" rel="tag"># python</a>
+              <a href="/tags/smart-car/" rel="tag"># smart car</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/03/02/%E6%9C%80%E5%B0%8F%E8%A6%86%E7%9B%96%E5%9C%86/" rel="prev" title="最小覆盖圆">
+      <i class="fa fa-chevron-left"></i> 最小覆盖圆
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#小车运动参数计算"><span class="nav-number">1.</span> <span class="nav-text">小车运动参数计算</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-后轮电子差速"><span class="nav-number">1.1.</span> <span class="nav-text">1.后轮电子差速</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-前轮角度控制"><span class="nav-number">1.2.</span> <span class="nav-text">2.前轮角度控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#算法"><span class="nav-number">1.2.1.</span> <span class="nav-text">算法</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="星辰物语"
+      src="https://avatars3.githubusercontent.com/u/32411140?s=460&u=a2fd61c0415bce60d52d038fc137e75716c3c762&v=4">
+  <p class="site-author-name" itemprop="name">星辰物语</p>
+  <div class="site-description" itemprop="description">热爱研究各类电子技术</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">39</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/czstara12" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;czstara12" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:czstara12@qq.com" title="E-Mail → mailto:czstara12@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/290670428" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;290670428" rel="noopener" target="_blank"><i class=" fa-fw"></i>Bilibili</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://wpa.qq.com/msgrd?v=3&uin=1434304668&site=qq&menu=yes" title="QQ → http:&#x2F;&#x2F;wpa.qq.com&#x2F;msgrd?v&#x3D;3&amp;uin&#x3D;1434304668&amp;site&#x3D;qq&amp;menu&#x3D;yes" rel="noopener" target="_blank"><i class=" fa-fw"></i>QQ</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://baidu.com/" title="https:&#x2F;&#x2F;baidu.com" rel="noopener" target="_blank">Baidu</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://czstara12.github.io/" title="https:&#x2F;&#x2F;czstara12.github.io">招募友链 欢迎加入</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">豫ICP备20010076号 </a>
+      <img src="http://www.beian.gov.cn/portal/download" style="display: inline-block;">
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">星辰物语</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  },
+  svg: {
+    fontCache: 'global'
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
