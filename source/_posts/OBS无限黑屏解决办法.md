@@ -19,25 +19,7 @@ obs软件图形性能首选项设置为节能，重启软件
 
 win10设置--系统--显示--图形设置
 
-1.
+![image-20210302091824401](http://d0.ananas.chaoxing.com/download/b683820fb322e13012a65abe2b2c2417?at_=1614647910890&ak_=6e46bbf26e16ac8fe5b39a3c76b6df8b&ad_=5305328daeb07a3b5df23c61dd45be7b&fn=image-20210302091824401)
 
-![image-20200906165331604](http://d0.ananas.chaoxing.com/download/b09deb02c2800ed3a380f621b4ad14d7?fn=image-20200906165331604)
-
-2.
-
-![image-20200906165344545](http://d0.ananas.chaoxing.com/download/741e471751f679565068896d22a03321?fn=image-20200906165344545)
-
-3.
-
-![image-20200906165415829](http://d0.ananas.chaoxing.com/download/68b4ee492a723a2eaae917d7c581065a?fn=image-20200906165415829)
-
-4.
-
-在第一个显示标签里 拨到最下面
-
-![image-20200906165439562](http://d0.ananas.chaoxing.com/download/74c0ed907aa32fa3a630f1d4780494cd?fn=image-20200906165439562)
-
-5.
-
-![image-20200906165450845](http://d0.ananas.chaoxing.com/download/b206f2bc2125b1a5bc486807baf4620e?fn=image-20200906165450845)
+![image-20210302091930224](http://d0.ananas.chaoxing.com/download/e0352691917917a30e1755aae8dc4699?at_=1614647973150&ak_=86379bcb12583f2d32aab54360928776&ad_=35a21bceb97dc1ece58482ba6a9c5a08&fn=image-20210302091930224)
 

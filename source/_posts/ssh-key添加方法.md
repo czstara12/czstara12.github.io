@@ -143,7 +143,7 @@ XwfEIMky3TSTsmo8mPw/N1TdFhBMepub/OJ0JG8VK73p6HnWUfxgQ4rnkvSuCes7
 
 ## 使用puttygen创建和转换秘钥
 
-![image-20200904192859880](http://d0.ananas.chaoxing.com/download/f6fea8dd7d7901ce9ec41f277dad7e2b?fn=image-20200904192859880)
+![image-20210302092308744](http://d0.ananas.chaoxing.com/download/05bd91008745df5e6659769ce69547dc?at_=1614648192340&ak_=42b68aa5c108d56e98fe264c9d5ea9e5&ad_=e019efb6e113b184e7f7429959319b05&fn=image-20210302092308744)
 
 点击Generate生成秘钥对
 
@@ -161,5 +161,5 @@ OpenSSH key为老版本RSA格式
 
 OpenSSH key(force new file format)为新版本OPENSSH格式
 
-![image-20200904193409065](http://d0.ananas.chaoxing.com/download/28449c7cab3519b39c96567589dc9ed8?fn=image-20200904193409065)
+![image-20210302092335223](http://d0.ananas.chaoxing.com/download/5589bcc71869d8094ebe95dd28c79418?at_=1614648217108&ak_=3e57a37b6778e74287dc47f7f676d03c&ad_=9963e5027a806f77c2c7fdcc2bec3ff5&fn=image-20210302092335223)
 
