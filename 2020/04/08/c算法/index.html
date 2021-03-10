@@ -31,7 +31,7 @@
 <meta property="og:description" content="c字符转换和最小覆盖圆算法">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-04-08T16:35:52.000Z">
-<meta property="article:modified_time" content="2021-03-02T02:23:55.641Z">
+<meta property="article:modified_time" content="2021-03-10T07:24:39.612Z">
 <meta property="article:author" content="星辰物语">
 <meta property="article:tag" content="(宽)字符集操作函数">
 <meta property="article:tag" content="unicode编码">
@@ -204,7 +204,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-02 02:23:55" itemprop="dateModified" datetime="2021-03-02T02:23:55+00:00">2021-03-02</time>
+                <time title="修改时间：2021-03-10 07:24:39" itemprop="dateModified" datetime="2021-03-10T07:24:39+00:00">2021-03-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -240,8 +240,7 @@
 <h3 id="数字转换："><a href="#数字转换：" class="headerlink" title="数字转换："></a>数字转换：</h3><p>宽字符函数 普通C函数描述<br>wcstod() strtod() 把宽字符的初始部分转换为双精度浮点数<br>wcstol() strtol() 把宽字符的初始部分转换为长整数<br>wcstoul() strtoul() 把宽字符的初始部分转换为无符号长整数   </p>
 <h3 id="多字节字符和宽字符转换及操作："><a href="#多字节字符和宽字符转换及操作：" class="headerlink" title="多字节字符和宽字符转换及操作："></a>多字节字符和宽字符转换及操作：</h3><p>宽字符函数描述<br>mblen() 根据locale的设置确定字符的字节数<br>mbstowcs() 把多字节字符串转换为宽字符串<br>mbtowc()/btowc() 把多字节字符转换为宽字符<br>wcstombs() 把宽字符串转换为多字节字符串<br>wctomb()/wctob() 把宽字符转换为多字节字符  </p>
 <h3 id="输入和输出："><a href="#输入和输出：" class="headerlink" title="输入和输出："></a>输入和输出：</h3><p>宽字符函数 普通C函数描述<br>fgetwc() fgetc() 从流中读入一个字符并转换为宽字符<br>fgetws() fgets() 从流中读入一个字符串并转换为宽字符串<br>fputwc() fputc() 把宽字符转换为多字节字符并且输出到标准输出<br>fputws() fputs() 把宽字符串转换为多字节字符并且输出到标准输出串<br>getwc() getc() 从标准输入中读取字符， 并且转换为宽字符<br>getwchar() getchar() 从标准输入中读取字符， 并且转换为宽字符<br>None gets() 使用fgetws()<br>putwc() putc() 把宽字符转换成多字节字符并且写到标准输出<br>putwchar() putchar() 把宽字符转换成多字节字符并且写到标准输出<br>None puts() 使用fputws()<br>ungetwc() ungetc() 把一个宽字符放回到输入流中   </p>
-<p>###　字符串操作：   </p>
-<p>宽字符函数 普通C函数描述<br>wcscat() strcat() 把一个字符串接到另一个字符串的尾部<br>wcsncat() strncat() 类似于wcscat()， 而且指定粘接字符串的粘接长度.<br>wcschr() strchr() 查找子字符串的第一个位置<br>wcsrchr() strrchr() 从尾部开始查找子字符串出现的第一个位置<br>wcspbrk() strpbrk() 从一字符字符串中查找另一字符串中任何一个字符第一次出现的位置<br>wcswcs()/wcsstr() strchr() 在一字符串中查找另一字符串第一次出现的位置<br>wcscspn() strcspn() 返回不包含第二个字符串的的初始数目<br>wcsspn() strspn() 返回包含第二个字符串的初始数目<br>wcscpy() strcpy() 拷贝字符串<br>wcsncpy() strncpy() 类似于wcscpy()， 同时指定拷贝的数目<br>wcscmp() strcmp() 比较两个宽字符串<br>wcsncmp() strncmp() 类似于wcscmp()， 还要指定比较字符字符串的数目<br>wcslen() strlen() 获得宽字符串的数目<br>wcstok() strtok() 根据标示符把宽字符串分解成一系列字符串<br>wcswidth() None 获得宽字符串的宽度<br>wcwidth() None 获得宽字符的宽度<br>另外还有对应于memory操作的 wmemcpy()， wmemchr()， wmemcmp()， wmemmove()， wmemset()</p>
+<h3 id="字符串操作："><a href="#字符串操作：" class="headerlink" title="字符串操作："></a>字符串操作：</h3><p>宽字符函数 普通C函数描述<br>wcscat() strcat() 把一个字符串接到另一个字符串的尾部<br>wcsncat() strncat() 类似于wcscat()， 而且指定粘接字符串的粘接长度.<br>wcschr() strchr() 查找子字符串的第一个位置<br>wcsrchr() strrchr() 从尾部开始查找子字符串出现的第一个位置<br>wcspbrk() strpbrk() 从一字符字符串中查找另一字符串中任何一个字符第一次出现的位置<br>wcswcs()/wcsstr() strchr() 在一字符串中查找另一字符串第一次出现的位置<br>wcscspn() strcspn() 返回不包含第二个字符串的的初始数目<br>wcsspn() strspn() 返回包含第二个字符串的初始数目<br>wcscpy() strcpy() 拷贝字符串<br>wcsncpy() strncpy() 类似于wcscpy()， 同时指定拷贝的数目<br>wcscmp() strcmp() 比较两个宽字符串<br>wcsncmp() strncmp() 类似于wcscmp()， 还要指定比较字符字符串的数目<br>wcslen() strlen() 获得宽字符串的数目<br>wcstok() strtok() 根据标示符把宽字符串分解成一系列字符串<br>wcswidth() None 获得宽字符串的宽度<br>wcwidth() None 获得宽字符的宽度<br>另外还有对应于memory操作的 wmemcpy()， wmemchr()， wmemcmp()， wmemmove()， wmemset()</p>
 <h2 id="最小圆覆盖算法"><a href="#最小圆覆盖算法" class="headerlink" title="最小圆覆盖算法"></a>最小圆覆盖算法</h2><h3 id="算法目的："><a href="#算法目的：" class="headerlink" title="算法目的："></a>算法目的：</h3><p>最小圆覆盖算法可以在线性时间复杂度内求出覆盖n个点的最小圆</p>
 <h3 id="算法步骤："><a href="#算法步骤：" class="headerlink" title="算法步骤："></a>算法步骤：</h3><ol>
 <li>首先现将所有点随机排列</li>
@@ -344,7 +343,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#算法1"><span class="nav-number">1.</span> <span class="nav-text">算法1</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#C语言-宽字符集操作函数-unicode编码"><span class="nav-number">1.1.</span> <span class="nav-text">C语言:宽字符集操作函数(unicode编码)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#字符分类："><span class="nav-number">1.1.1.</span> <span class="nav-text">字符分类：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#大小写转换："><span class="nav-number">1.1.2.</span> <span class="nav-text">大小写转换：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符比较："><span class="nav-number">1.1.3.</span> <span class="nav-text">字符比较：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日期和时间转换："><span class="nav-number">1.1.4.</span> <span class="nav-text">日期和时间转换：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#打印和扫描字符串："><span class="nav-number">1.1.5.</span> <span class="nav-text">打印和扫描字符串：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数字转换："><span class="nav-number">1.1.6.</span> <span class="nav-text">数字转换：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多字节字符和宽字符转换及操作："><span class="nav-number">1.1.7.</span> <span class="nav-text">多字节字符和宽字符转换及操作：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输入和输出："><span class="nav-number">1.1.8.</span> <span class="nav-text">输入和输出：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最小圆覆盖算法"><span class="nav-number">1.2.</span> <span class="nav-text">最小圆覆盖算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#算法目的："><span class="nav-number">1.2.1.</span> <span class="nav-text">算法目的：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法步骤："><span class="nav-number">1.2.2.</span> <span class="nav-text">算法步骤：</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#算法1"><span class="nav-number">1.</span> <span class="nav-text">算法1</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#C语言-宽字符集操作函数-unicode编码"><span class="nav-number">1.1.</span> <span class="nav-text">C语言:宽字符集操作函数(unicode编码)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#字符分类："><span class="nav-number">1.1.1.</span> <span class="nav-text">字符分类：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#大小写转换："><span class="nav-number">1.1.2.</span> <span class="nav-text">大小写转换：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符比较："><span class="nav-number">1.1.3.</span> <span class="nav-text">字符比较：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日期和时间转换："><span class="nav-number">1.1.4.</span> <span class="nav-text">日期和时间转换：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#打印和扫描字符串："><span class="nav-number">1.1.5.</span> <span class="nav-text">打印和扫描字符串：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数字转换："><span class="nav-number">1.1.6.</span> <span class="nav-text">数字转换：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多字节字符和宽字符转换及操作："><span class="nav-number">1.1.7.</span> <span class="nav-text">多字节字符和宽字符转换及操作：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输入和输出："><span class="nav-number">1.1.8.</span> <span class="nav-text">输入和输出：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串操作："><span class="nav-number">1.1.9.</span> <span class="nav-text">字符串操作：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最小圆覆盖算法"><span class="nav-number">1.2.</span> <span class="nav-text">最小圆覆盖算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#算法目的："><span class="nav-number">1.2.1.</span> <span class="nav-text">算法目的：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法步骤："><span class="nav-number">1.2.2.</span> <span class="nav-text">算法步骤：</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -360,7 +359,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">17</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -373,7 +372,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">39</span>
+        <span class="site-state-item-count">42</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
