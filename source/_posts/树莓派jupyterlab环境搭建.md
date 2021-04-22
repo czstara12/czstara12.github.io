@@ -175,6 +175,8 @@ export http_proxy='http://127.0.0.1:7890'
 export https_proxy='https://127.0.0.1:7890'
 ```
 
+可能需要临时把主机防火墙关掉
+
 安装
 
 ```
