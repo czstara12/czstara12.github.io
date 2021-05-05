@@ -172,10 +172,10 @@ sudo apt-get install python3-opencv
 
 ```
 export http_proxy='http://127.0.0.1:7890'
-export https_proxy='https://127.0.0.1:7890'
+export https_proxy='http://127.0.0.1:7890'
 ```
 
-可能需要临时把主机防火墙关掉
+可能需要临时把主机防火墙关掉 或者使用ssh穿透防火墙
 
 安装
 
