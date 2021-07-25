@@ -40,8 +40,6 @@ hexo server
 sudo apt-get install -y git
 ```
 
-
-
 ### 2.安装node.js
 
 见https://github.com/nodesource/distributions/blob/master/README.md
@@ -298,7 +296,7 @@ deploy:
 
 ## 四 发布
 
-![image-20200825185742435](http://d0.ananas.chaoxing.com/download/29ba7a662d6df4c9a1f91b3a8c76acbe?fn=image-20200825185742435)
+![image-20210725170612738](https://raw.githubusercontent.com/czstara12/img_rope/master/img/image-20210725170612738.png)
 
 创建一个和你用户名相同的仓库，后面加github.io
 
