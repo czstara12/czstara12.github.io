@@ -30,11 +30,11 @@ HAL_UART_Receive_DMA(&huartx, addr, len);
 ```c
 	if(USART3->SR&0x10)//如果是空闲中断
 	{
+		__HAL_UART_CLEAR_IDLEFLAG(&huartX);//如果检测到空闲中断无论如何都要清除空闲中断标志 切记
 		if(addr[0]!=0x5a)//验证包头 或者其他验证数据有效性方法
 		{
 			HAL_UART_AbortReceive(&huart3);//终止传输
 			HAL_UART_Receive_DMA(&huartX, addr, 82);//重启传输
-			__HAL_UART_CLEAR_IDLEFLAG(&huartX);//清除空闲中断标志
 			//while(USART3->SR&0x10);//
 		}
 	}
