@@ -8,7 +8,7 @@ branches:
     - source # 只监控 source 的 branch
 script:
   - hexo generate # generate static files
-  - echo www.3939831.xyz >> public/cname
+  - echo www.3939831.xyz >> public/CNAME
 deploy:
   provider: pages
   skip-cleanup: true
