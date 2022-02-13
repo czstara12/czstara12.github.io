@@ -1,5 +1,5 @@
 ---
-title: 树莓派jupyterlab环境搭建
+title: 树莓派jupyterlab_64位新环境搭建
 date: 2022-02-12 17:05:31
 categories:
 - Linux
@@ -9,7 +9,7 @@ tags:
 - jupyterLab
 ---
 
-本文介绍了树莓派web python(jupyterLab)运行环境的搭建方法
+本文介绍了新版树莓派64位web python(jupyterLab)运行环境的搭建方法
 
 以及对应的批量制作时的备份镜像方法
 
@@ -19,11 +19,17 @@ tags:
 
 下载镜像https://www.raspberrypi.org/downloads/raspberry-pi-os/
 
-图为带桌面 不含软件
+注意下载下面的Raspberry Pi OS (64-bit)
+
+![image-20220213095204217](https://raw.githubusercontent.com/czstara12/img_rope/master/img/image-20220213095206016.png)
 
 插入内存卡
 
-格式化SDFormatter
+格式化sd卡
+
+SDFormatter
+
+![image-20220213095542097](https://raw.githubusercontent.com/czstara12/img_rope/master/img/image-20220213095542097.png)
 
 确定-确定
 
@@ -31,13 +37,13 @@ tags:
 
 解压缩
 
-win32 disk imager
+使用软件balena-etcher
 
 选择解压出来的文件
 
-点write(写入)
+![image-20220213095641391](https://raw.githubusercontent.com/czstara12/img_rope/master/img/image-20220213095641391.png)
 
-注意右上方的设备是否为要写入的设备
+注意中间的设备是否为要写入的设备
 
 ### 设置wifi网络连接
 
@@ -73,13 +79,9 @@ network={
 
 然后将内存卡插到树莓派上 并开机
 
-### Advanced IP Scanner
+获取树莓派ip(如果可以进入路由器后台 可直接进入路由器后台查看)
 
-扫描树莓派ip(如果可以进入路由器后台 可直接进入路由器后台查看)
-
-可以看到
-
-使用ssh进行连接
+然后使用ssh进行连接
 
 (此处使用的工具是MobaXterm也可以使用putty等SSH工具 请读者自行搜索下载)
 
@@ -109,11 +111,9 @@ sudo raspi-config
 
 设置分辨率
 
-finish
-
 ### 为了后续安装的顺利 此处配置代理服务器
 
-由于某些限制 此处写的比较简略 请读者自行寻找具体方法
+由于一些限制 此处写的比较简略 请读者自行寻找具体方法
 
 ```
 export http_proxy='http://127.0.0.1:7890'
