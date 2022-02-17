@@ -75,6 +75,8 @@ network={
 
 要求电脑连接上面配置文件所连接的wifi
 
+![image-20220217132604488](https://raw.githubusercontent.com/czstara12/img_rope/master/img/image-20220217132604488.png)
+
 (注意 如果文件建好后与上图图标不一样或者类型一类显示不一样 请尝试关闭windows的隐藏拓展名功能 然后再把名称改到与图中一致)
 
 然后将内存卡插到树莓派上 并开机
@@ -85,13 +87,9 @@ network={
 
 (此处使用的工具是MobaXterm也可以使用putty等SSH工具 请读者自行搜索下载)
 
-用户名
+用户名:pi
 
-pi
-
-默认密码
-
-raspberry
+默认密码:raspberry
 
 ## 调节配置
 
@@ -99,36 +97,38 @@ raspberry
 sudo raspi-config
 ```
 
-设置boot启动desktop
-
-打开摄像头接口
-
-打开VNC
-
-打开串口
-
 拓展内存
 
-设置分辨率
+![image-20220217133442619](https://raw.githubusercontent.com/czstara12/img_rope/master/img/image-20220217133442619.png)
+
+![image-20220217133458250](https://raw.githubusercontent.com/czstara12/img_rope/master/img/image-20220217133458250.png)
+
+其余谨凭读者喜好设置(打开摄像头接口,打开VNC,打开串口等)
 
 ### 为了后续安装的顺利 此处配置代理服务器
 
 由于一些限制 此处写的比较简略 请读者自行寻找具体方法
 
 ```
-export http_proxy='http://127.0.0.1:7890'
-export https_proxy='http://127.0.0.1:7890'
-export all_proxy='http://127.0.0.1:7890'
+export all_proxy=http://127.0.0.1:7890
+export http_proxy=$all_proxy
+export https_proxy=$all_proxy
+export ftp_proxy=$all_proxy
+export socks_proxy=$all_proxy
 ```
 
 可能需要临时把主机防火墙关掉 或者使用ssh穿透防火墙
+
+可以用命令`curl cip.cc` 检查终端是否处于代理状态。
+
+类似的还有`curl ifconfig.me`
 
 ## 更新软件
 
 ```
 sudo apt update
 sudo apt dist-upgrade
-sudo apt install -y vim#安装包
+sudo apt install -y vim#安装vim包
 ```
 
 ## 安装miniforge
@@ -146,7 +146,7 @@ bash Mambaforge-$(uname)-$(uname -m).sh
 conda install jupyterlab
 ```
 
-开放外网访问
+开放远程访问
 
 ```
 jupyter lab --generate-config
@@ -267,7 +267,7 @@ chmod +x pishrink.sh
 sudo dd bs=1M if=/dev/mmcblk0 of=/dev/sda status=progress
 ```
 
-### tip
+### tips
 
 树莓派处理图像切记不要在原分辨率(640x480)下处理
 
@@ -282,7 +282,7 @@ sudo dd bs=1M if=/dev/mmcblk0 of=/dev/sda status=progress
 如果电脑支持mDNS服务 那就可以用浏览器直接访问
 
 ```
-raspberry.local:8888
+raspberrypi.local:8888
 ```
 
 进入到编程界面
