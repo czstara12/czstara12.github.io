@@ -232,7 +232,7 @@ sudo vim /boot/config.txt
 写入
 
 ```
-dtoverlay=pi3-miniuart-bt
+dtoverlay=disable-bt
 ```
 
 然后重启
@@ -247,7 +247,7 @@ sudo reboot
 
 然后将全量备份文件传到linux虚拟机上
 
-(必须为英文环境的虚拟机 不可以用经过国产汉化的deepin 会报错 也不可以使用WSL 推荐ubuntu)
+(必须为英文环境的虚拟机 不可以用经过国产汉化的deepin 会报错 也不可以使用WSL 可以使用WSL2 推荐ubuntu)
 
 使用工具PiShrink进行裁剪
 
@@ -258,6 +258,14 @@ chmod +x pishrink.sh
 ```
 
 裁剪后此文件变小 下载回来即可
+
+## 树莓派卡复制
+
+此命令可以将树莓派卡克隆一份
+
+```
+sudo dd bs=1M if=/dev/mmcblk0 of=/dev/sda status=progress
+```
 
 ### tip
 
