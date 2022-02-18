@@ -294,3 +294,9 @@ raspberrypi.local:8888
 ```
 
 进入编程界面
+
+## VNC第三方客户端连接设置
+
+树莓派使用realvnc作为内置vnc服务器 连接必须使用realvnc提供的客户端软件 如果想用第三方的vnc(例如mobaxterm提供的vnc)就必须进行一些修改
+
+参见[此链接](https://www.raspberrypi.com/documentation/computers/remote-access.html#authenticating-to-vnc-server)
