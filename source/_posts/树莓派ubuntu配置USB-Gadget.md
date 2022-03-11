@@ -54,7 +54,7 @@ network:
 
 然后运行脚本(请将下面的代码保存为文件然后运行)
 
-```sh
+```
 #!/bin/bash
 # Set up a Raspberry Pi 4 as a USB-C Ethernet Gadget
 # Based on:

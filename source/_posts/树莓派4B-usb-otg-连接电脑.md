@@ -15,7 +15,9 @@ tags:
 
 <!-- more -->
 
-本文介绍的方法相对简单 也不是最优方案 只支持windows和linux的连接 对macos的连接支持可见[此](https://www.hardill.me.uk/wordpress/2019/11/02/pi4-usb-c-gadget/)
+本文使用的脚本修改自[rpi-usb-gadget](https://github.com/kmpm/rpi-usb-gadget)
+
+[这里](https://www.hardill.me.uk/wordpress/2019/11/02/pi4-usb-c-gadget/)是有关修改方法的介绍
 
 打开树莓派USB OTG模式。修改`/boot/config.txt`文件，在最后一行加入：
 

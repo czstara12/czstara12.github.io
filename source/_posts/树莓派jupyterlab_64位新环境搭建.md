@@ -103,7 +103,7 @@ sudo raspi-config
 
 ![image-20220217133458250](https://raw.githubusercontent.com/czstara12/img_rope/master/img/image-20220217133458250.png)
 
-其余谨凭读者喜好设置(打开摄像头接口,打开VNC,打开串口等)
+其余谨凭读者喜好设置(打开摄像头接口,打开VNC,打开串口,打开GPIO等)
 
 ### 为了后续安装的顺利 此处配置代理服务器
 
@@ -195,30 +195,16 @@ sudo systemctl enable jupyterlab.service
 sudo reboot
 ```
 
-
-
 ## 安装opencv
 
 ```
 conda install opencv
 ```
 
-## 安装nodejs
-
-(不需要了)
-
-```sh
-#curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
-#sudo apt-get install -y nodejs
-```
-
-## 安装小控件
+## 安装ipywidgets控件
 
 ```shell
-conda install matplotlib
-conda install ipywidgets
-#export NODE_OPTIONS=--max-old-space-size=2048
-#jupyter lab build --dev-build=False --minimize=False
+conda install matplotlib ipywidgets
 ```
 
 然后重启
