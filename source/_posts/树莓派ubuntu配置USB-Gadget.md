@@ -16,285 +16,114 @@ USB Gadget可以让你使用一根usb-c线连接电脑同时让你的网络连�
 
 # ubuntu配置usb网络
 
-通过一些准备条件和一个脚本即可完成所有的配置
+一键配置脚本
 
-添加"`dtoverlay=dwc2`"到"/boot/firmware/config.txt"
+```python
+#!/bin/python3
+def check_string(strs,str):
+    for line in strs:
+        if str in line:
+            return True # The string is found
+    return False  # The string does not exist in the file
 
-添加"`modules-load=dwc2`"到"/boot/firmware/cmdline.txt"
+usercfg_file=open('/boot/firmware/usercfg.txt','r+')
+if check_string(usercfg_file.readlines(),'dtoverlay=dwc2') == False:
+    usercfg_file.write('\ndtoverlay=dwc2\n')
+    print('/boot/firmware/usercfg.txt添加dtoverlay=dwc2')
+usercfg_file.close()
 
-添加"`libcomposite`"到"/etc/modules"
+cmdline_file=open('/boot/firmware/cmdline.txt','r+')
+if check_string(cmdline_file.readlines(),'modules-load=dwc2') == False:
+    cmdline_file.write(' modules-load=dwc2')
+    print('/boot/firmware/cmdline.txt添加modules-load=dwc2')
+cmdline_file.close()
 
-/etc/netplan/50-cloud-init.yaml中添加usb0项 修改后如下(添加的内容为11-14行)
+modules_file=open('/etc/modules','r+')
+if check_string(modules_file.readlines(),'libcomposite') == False:
+    modules_file.write('\nlibcomposite\n')
+    print('/etc/modules添加libcomposite')
+modules_file.close()
 
-```yaml
-# This file is generated from information provided by the datasource.  Changes
-# to it will not persist across an instance reboot.  To disable cloud-init's
-# network configuration capabilities, write a file
-# /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg with the following:
-# network: {config: disabled}
-network:
+net_file=open('/etc/netplan/12-usb.yaml','w')
+net_file.write('''network:
     ethernets:
-        eth0:
-            dhcp4: true
-            optional: true
-        usb0:								#加入的内容 从这里
+        usb0:
             dhcp4: false
             optional: true
-            addresses: [192.168.39.39/24]	#到这里
+            addresses: [192.168.39.39/24]
     version: 2
-    wifis:
-        wlan0:
-            access-points:
-                net4you:
-                    password: raspberry
-            dhcp4: true
-            optional: true
+''')
+print('创建/etc/netplan/12-usb.yaml')
+net_file.close()
 
-```
+import os
+os.system('sudo apt install -y dnsmasq')
+print('安装dnsmasq')
 
-然后运行脚本(请将下面的代码保存为文件然后运行)
-
-```
-#!/bin/bash
-# Set up a Raspberry Pi 4 as a USB-C Ethernet Gadget
-# Based on:
-#     - https://www.hardill.me.uk/wordpress/2019/11/02/pi4-usb-c-gadget/
-#     - https://pastebin.com/VtAusEmf
-#     - https://gist.github.com/ianfinch/08288379b3575f360b64dee62a9f453f
-
-# Options for later
-USBFILE=/usr/local/sbin/usb-gadget.sh
-UNITFILE=/lib/systemd/system/usb-gadget.service
-BASE_IP=192.168.39
-
-# some usefull functions
-confirm() {
-    # call with a prompt string or use a default
-    read -r -p "${1:-Are you sure? [y/N]} " response
-    case "$response" in
-        [yY][eE][sS]|[yY]) 
-            true
-            ;;
-        *)
-            false
-            ;;
-    esac
-}
-
-teeconfirm() {
-    line=$1
-    f=$2
-    if ! $(grep -q "$line" $f); then
-        echo
-        echo "Add the line '$line' to '$f'"
-        ! confirm && exit
-        echo "$line" | sudo tee -a $f
-    fi
-}
-
-##### Actual work #####
-
-cat << EOF
-This script will modify '/boot/config.txt', '/boot/cmdline.txt' and other files.
-Warning, It might brick your device!
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-Continue with modifications?
-EOF
-! confirm && exit
-
-#teeconfirm "dtoverlay=dwc2" "/boot/config.txt"
-
-#if ! $(grep -q modules-load=dwc2 /boot/cmdline.txt) ; then
-#    echo
-#    echo "Add the line modules-load=dwc2 to /boot/cmdline.txt"
-#    if ! confirm ; then
-#        exit
-#    fi
-#    sudo sed -i '${s/$/ modules-load=dwc2/}' /boot/cmdline.txt
-#fi
-
-#teeconfirm "libcomposite" "/etc/modules"
-
-#teeconfirm "denyinterfaces usb0" "/etc/dhcpcd.conf"
-
-# install dnsmasq
-if [[ ! -e /etc/dnsmasq.d ]] ; then
-    echo
-    echo "Install dnsmasq"
-    ! confirm && exit
-    sudo apt install dnsmasq
-fi
-
-# configure dnsmasq for usb0
-if [[ ! -e /etc/dnsmasq.d/usb-gadget ]] ; then
-	cat << EOF | sudo tee /etc/dnsmasq.d/usb-gadget > /dev/null
-dhcp-rapid-commit
+dnsmasq_conf_file=open('/etc/dnsmasq.d/usb-gadget','w')
+dnsmasq_conf_file.write('''dhcp-rapid-commit
 dhcp-authoritative
 no-ping
 interface=usb0
-dhcp-range=usb0,$BASE_IP.2,$BASE_IP.6,255.255.255.0,1h
+dhcp-range=usb0,192.168.39.2,192.168.39.6,255.255.255.0,1h
 domain=usb.lan
 dhcp-option=usb0,3
 leasefile-ro
 port=0
-EOF
-    echo "Created /etc/dnsmasq.d/usb-gadget"
-fi
-
-# configure static ip for interface usb0
-#if [[ ! -e /etc/network/interfaces.d/usb0 ]] ; then
-#    cat << EOF | sudo tee /etc/network/interfaces.d/usb0 > /dev/null
-#auto usb0
-#allow-hotplug usb0
-#iface usb0 inet static
-#  address $BASE_IP.39
-#  netmask 255.255.255.0
-#EOF
-#    echo "Created /etc/network/interfaces.d/usb0"
-#fi
-
-if [[ ! -e /etc/usb-gadgets ]]; then 
-    sudo mkdir -p /etc/usb-gadgets
-fi
-if [[ ! -e /etc/usb-gadgets/net-rndis ]]; then
-    cat << 'EOF' | sudo tee /etc/usb-gadgets/net-rndis > /dev/null
-config1="RNDIS"
-config2="CDC"
-usb_version="0x0200" # USB 2.0
-device_class="0xEF"
-device_subclass="0x02"
-bcd_device="0x0100" # v1.0.0
-device_protocol="0x01"
-vendor_id="0x1d50"
-product_id="0x60c7"
-manufacturer="Ian"
-product="RPi4 USB Gadget"
-serial="fedcba9876543211"
-attr="0x80" # Bus powered
-power="250"
-ms_vendor_code="0xcd" # Microsoft
-ms_qw_sign="MSFT100" # also Microsoft (if you couldn't tell)
-ms_compat_id="RNDIS" # matches Windows RNDIS Drivers
-ms_subcompat_id="5162001" # matches Windows RNDIS 6.0 Driver
-mac="01:23:45:67:89:ab"
-dev_mac="02$(echo ${mac} | cut -b 3-)"
-host_mac="12$(echo ${mac} | cut -b 3-)"
-EOF
-fi
-
-if [[ ! -e /etc/usb-gadgets/net-ecm ]]; then
-    cat << 'EOF' | sudo tee /etc/usb-gadgets/net-ecm > /dev/null
-config1="ECM"
-usb_version="0x0200" # USB 2.0
-vendor_id="0x1d6b" # Linux Foundation
-product_id="0x0104" # Multifunction composite gadget
-bcd_device="0x0100" # v1.0.0
-device_class="0xEF"
-device_subclass="0x02"
-device_protocol="0x01"
-manufacturer="github.com/kmpm"
-product="RPi4 USB Gadget"
-serial="fedcba9876543211"
-power="250"
-host_mac="00:dc:c8:f7:75:14"
-dev_mac="00:dd:dc:eb:6d:a1"
-EOF
-
-fi
+''')
+print('创建/etc/dnsmasq.d/usb-gadget')
+dnsmasq_conf_file.close()
 
 
-# create script, $USBFILE, for usb gadget device in 
-if sudo test ! -e "$USBFILE" ; then
-    cat << 'EOF' | sudo tee $USBFILE > /dev/null
-#!/bin/bash
-gadget=/sys/kernel/config/usb_gadget/pi4
-if [[ ! -e "/etc/usb-gadgets/$1" ]]; then
-    echo "No such config, $1, found in /etc/usb-gadgets"
-    exit 1
-fi
-source /etc/usb-gadgets/$1
-mkdir -p ${gadget}
-echo "${vendor_id}" > ${gadget}/idVendor
-echo "${product_id}" > ${gadget}/idProduct
-echo "${bcd_device}" > ${gadget}/bcdDevice
-echo "${usb_version}" > ${gadget}/bcdUSB
-if [ ! -z "${device_class}" ] ; then
-    echo "${device_class}" > ${gadget}/bDeviceClass
-    echo "${device_subclass}" > ${gadget}/bDeviceSubClass
-    echo "${device_protocol}" > ${gadget}/bDeviceProtocol
-fi
-mkdir -p ${gadget}/strings/0x409
-echo "${manufacturer}" > ${gadget}/strings/0x409/manufacturer
-echo "${product}" > ${gadget}/strings/0x409/product
-echo "${serial}" > ${gadget}/strings/0x409/serialnumber
-mkdir ${gadget}/configs/c.1
-echo "${power}" > ${gadget}/configs/c.1/MaxPower
-if [ ! -z "${attr}" ]; then
-    echo "${attr}" > ${gadget}/configs/c.1/bmAttributes
-fi
-mkdir -p ${gadget}/configs/c.1/strings/0x409
-echo "${config1}" > ${gadget}/configs/c.1/strings/0x409/configuration
-if [ "${config1}" = "ECM" ] ; then
-    mkdir -p ${gadget}/functions/ecm.usb0
-    echo "${dev_mac}" > ${gadget}/functions/ecm.usb0/dev_addr
-    echo "${host_mac}" > ${gadget}/functions/ecm.usb0/host_addr
-    ln -s ${gadget}/functions/ecm.usb0 ${gadget}/configs/c.1/
-    
-    #mkdir -p ${gadget}/functions/acm.usb0
-    #ln -s functions/acm.usb0 ${gadget}/configs/c.1/
-fi
-if [ "${config1}" = "RNDIS" ] ; then
-    mkdir -p ${gadget}/os_desc
-    echo "1" > ${gadget}/os_desc/use
-    echo "${ms_vendor_code}" > ${gadget}/os_desc/b_vendor_code
-    echo "${ms_qw_sign}" > ${gadget}/os_desc/qw_sign
-    mkdir -p ${gadget}/functions/rndis.usb0
-    echo "${dev_mac}" > ${gadget}/functions/rndis.usb0/dev_addr
-    echo "${host_mac}" > ${gadget}/functions/rndis.usb0/host_addr
-    echo "${ms_compat_id}" > ${gadget}/functions/rndis.usb0/os_desc/interface.rndis/compatible_id
-    echo "${ms_subcompat_id}" > ${gadget}/functions/rndis.usb0/os_desc/interface.rndis/sub_compatible_id
-    ln -s ${gadget}/configs/c.1 ${gadget}/os_desc
-    ln -s ${gadget}/functions/rndis.usb0 ${gadget}/configs/c.1
-fi
-ls /sys/class/udc > ${gadget}/UDC
-udevadm settle -t 5 || :
-#ifup usb0
-#service dnsmasq restart
-EOF
+sh_file=open('/usr/local/sbin/usb-gadget.sh','w')
+sh_file.write('''#!/bin/bash
+cd /sys/kernel/config/usb_gadget/
+mkdir -p pi4
+cd pi4
+echo 0x1d50 > idVendor # Linux Foundation
+echo 0x60c7 > idProduct # Multifunction Composite Gadget
+echo 0x0100 > bcdDevice # v1.0.0
+echo 0x0200 > bcdUSB # USB2
+echo 0xEF > bDeviceClass
+echo 0x02 > bDeviceSubClass
+echo 0x01 > bDeviceProtocol
+mkdir -p strings/0x409
+echo "fedcba9876543211" > strings/0x409/serialnumber
+echo "test" > strings/0x409/manufacturer
+echo "RPi4 USB Gadget" > strings/0x409/product
+mkdir -p configs/c.1/strings/0x409
+echo "RNDIS network" > configs/c.1/strings/0x409/configuration
+echo 250 > configs/c.1/MaxPower
+echo "0x80" > configs/c.1/bmAttributes
+mkdir -p os_desc
+echo "1" > os_desc/use
+echo "0xcd" > os_desc/b_vendor_code
+echo "MSFT100" > os_desc/qw_sign
+# Add functions here
+# see gadget configurations below
+# End functions
+mkdir -p functions/rndis.usb0
+echo "02:23:45:67:89:ab" > functions/rndis.usb0/dev_addr
+echo "12:23:45:67:89:ab" > functions/rndis.usb0/host_addr
+echo "RNDIS" > functions/rndis.usb0/os_desc/interface.rndis/compatible_id
+echo "5162001" > functions/rndis.usb0/os_desc/interface.rndis/sub_compatible_id
+ln -s configs/c.1 os_desc
+ln -s functions/rndis.usb0 configs/c.1
+#mkdir -p functions/ecm.usb0
+#HOST="00:dc:c8:f7:75:14" # "HostPC"
+#SELF="00:dd:dc:eb:6d:a1" # "BadUSB"
+#echo $HOST > functions/ecm.usb0/host_addr
+#echo $SELF > functions/ecm.usb0/dev_addr
+#ln -s functions/ecm.usb0 configs/c.1/
+#udevadm settle -t 5 || :
+ls /sys/class/udc > UDC
+''')
+print('创建/usr/local/sbin/usb-gadget.sh')
+sh_file.close()
+os.system('sudo chmod 750 /usr/local/sbin/usb-gadget.sh')
 
-    sudo chmod 750 $USBFILE
-    echo "Created $USBFILE"
-fi
-
-
-prompt="Pick an option:"
-options=("RNDIS Network device type (best with windows)" "ECM Network device type")
-
-DEVICETYPE="net-rndis"
-
-echo -e "\n\nSelect network device type"
-PS3="$prompt "
-select opt in "${options[@]}" ; do 
-    case "$REPLY" in
-    1) DEVICETYPE="net-rndis";break;;
-    2) DEVICeTYPE="net-ecm";break;;
-    *) echo "Invalid option. Try another one.";continue;;
-    esac
-done
-echo -e "\nYou selected '$DEVICETYPE' which will be configured in"
-echo -e "the systemd unit file for usb-gadget.\n"
-
-
-# make sure $USBFILE runs on every boot using $UNITFILE
-if [[ ! -e $UNITFILE ]] ; then
-    cat << EOF | sudo tee $UNITFILE > /dev/null
-[Unit]
+service_file=open('/lib/systemd/system/usb-gadget.service','w')
+service_file.write('''[Unit]
 Description=USB gadget initialization
 After=network-online.target
 Wants=network-online.target
@@ -302,23 +131,14 @@ Wants=network-online.target
 [Service]
 Type=oneshot
 RemainAfterExit=yes
-ExecStart=$USBFILE $DEVICETYPE
+ExecStart=/usr/local/sbin/usb-gadget.sh
 [Install]
 WantedBy=sysinit.target
-EOF
-    echo "Created $UNITFILE"
-    sudo systemctl daemon-reload
-    sudo systemctl enable usb-gadget
-fi
-
-cat << EOF
-Done setting up as USB gadget
-You must reboot for changes to take effect
-You can reach the device on $BASE_IP.39 when connected by USB
-If you want to disable the usb0/gadget interface then
-please run 'sudo systemctl disable usb-gadget'
-and reboot.
-EOF
-
+''')
+service_file.close()
+print('创建/lib/systemd/system/usb-gadget.service')
+os.system('sudo systemctl daemon-reload')
+os.system('sudo systemctl enable usb-gadget')
+print('添加启动服务')
 ```
 
