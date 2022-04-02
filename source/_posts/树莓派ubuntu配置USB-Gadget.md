@@ -128,6 +128,7 @@ Description=USB gadget initialization
 After=network-online.target
 Wants=network-online.target
 #After=systemd-modules-load.service
+Before=dnsmasq.service
 [Service]
 Type=oneshot
 RemainAfterExit=yes
@@ -260,6 +261,7 @@ Description=USB gadget initialization
 After=network-online.target
 Wants=network-online.target
 #After=systemd-modules-load.service
+Before=dnsmasq.service
 [Service]
 Type=oneshot
 RemainAfterExit=yes
