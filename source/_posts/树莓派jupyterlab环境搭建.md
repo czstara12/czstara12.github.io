@@ -59,6 +59,8 @@ network={
 	psk="password"#wifi密码
 	priority=2#优先级 数字越高 越优先使用
 }
+
+#此处注意 多网络配置 中间要空一行
 network={
 	ssid="wifi ssid 2"
 	psk="password2"
