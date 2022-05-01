@@ -53,7 +53,7 @@ SDFormatter
 
 和一个名为wpa_supplicant.conf的配置文件
 
-配置文件内容
+配置文件内容 源自[此处](https://www.raspberrypi.com/documentation/computers/configuration.html#using-unsecured-networks)
 
 ```json
 country=CN
@@ -65,9 +65,10 @@ network={
 	psk="password"#wifi密码
 	priority=2#优先级 数字越高 越优先使用
 }
+
 network={
 	ssid="wifi ssid 2"
-	psk="password2"
+    key_mgmt=NONE #无密码设置此处
 	priority=1
 }
 #或者更多
