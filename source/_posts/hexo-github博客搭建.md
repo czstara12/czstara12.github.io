@@ -8,15 +8,11 @@ tags:
 - github
 ---
 
-
-
 <!-- more -->
 
 # hexo+github博客的搭建
 
-
-
-## 发布文章
+## 创建发布文章
 
 ```
 hexo new [布局] <文章标题>
@@ -27,6 +23,16 @@ hexo new [布局] <文章标题>
 ```
 hexo server
 ```
+
+## 提交
+
+```shell
+git add .
+git push
+hexo clean && hexo deploy
+```
+
+  
 
 # 搭建基于GitPages的hexo个人博客
 
@@ -316,6 +322,10 @@ git commit -m 'init'
 git remote add origin https://github.com/YUAN321340/YUAN321340.github.io.git
 git push -u origin master
 ```
+
+# 参考
+
+[在 GitHub Pages 上部署 Hexo | Hexo](https://hexo.io/zh-cn/docs/github-pages.html)
 
 ### 添加Travis CI(废弃)
 
