@@ -71,7 +71,7 @@ footer:
 
   # Beian ICP and gongan information for Chinese users. See: http://www.beian.miit.gov.cn, http://www.beian.gov.cn
   beian:
-    enable: true
+    enable: false
     icp: 豫ICP备20010076号
     # The digit in the num of gongan beian.
     gongan_id:  
@@ -206,6 +206,7 @@ links_settings:
 links:
   Baidu: https://baidu.com
   招募友链 欢迎加入: https://czstara12.github.io
+  Google: https://google.com
   #Title: http://yoursite.com
 
 # Table of Contents in the Sidebar

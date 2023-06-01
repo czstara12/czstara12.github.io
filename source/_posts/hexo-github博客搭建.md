@@ -8,13 +8,13 @@ tags:
 - github
 ---
 
-正在填坑
+
 
 <!-- more -->
 
 # hexo+github博客的搭建
 
-正在施工 请过几月再看
+
 
 ## 发布文章
 
@@ -42,7 +42,9 @@ sudo apt-get install -y git
 
 ### 2.安装node.js
 
-见https://github.com/nodesource/distributions/blob/master/README.md
+见[distributions/README.md at master · nodesource/distributions · GitHub](https://github.com/nodesource/distributions/blob/master/README.md)
+
+全平台安装包[Download | Node.js](https://nodejs.org/en/download)
 
 ### 3.安装hexo
 
@@ -285,7 +287,6 @@ theme: next
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: ''
-
 ```
 
 按自己需求配置 配置完后即可生成预览
@@ -316,7 +317,7 @@ git remote add origin https://github.com/YUAN321340/YUAN321340.github.io.git
 git push -u origin master
 ```
 
-### 添加Travis CI
+### 添加Travis CI(废弃)
 
 https://github.com/marketplace/travis-ci
 
@@ -359,4 +360,3 @@ hexo new "My New Post"
 ```
 
 编写source/_posts/下的对应的.md文件
-
