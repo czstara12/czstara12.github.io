@@ -25,15 +25,9 @@ GNU Screen可以看作是窗口管理器的命令行界面版本。它提供了�
 
 - **会话恢复**
 
-
-
 - **多窗口**
 
-
-
 - **会话共享**
-
-
 
 GNU's Screen 官方站点：http://www.gnu.org/software/screen/
 

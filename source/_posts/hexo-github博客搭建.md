@@ -8,6 +8,8 @@ tags:
 - github
 ---
 
+搭建github博客
+
 <!-- more -->
 
 # hexo+github博客的搭建
@@ -31,8 +33,6 @@ git add .
 git push
 hexo clean && hexo deploy
 ```
-
-  
 
 # 搭建基于GitPages的hexo个人博客
 
