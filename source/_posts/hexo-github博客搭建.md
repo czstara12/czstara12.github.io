@@ -327,43 +327,9 @@ git push -u origin master
 
 [在 GitHub Pages 上部署 Hexo | Hexo](https://hexo.io/zh-cn/docs/github-pages.html)
 
-### 添加Travis CI(废弃)
+[优化](https://www.wylu.me/posts/e0424f3f/)
 
-https://github.com/marketplace/travis-ci
-
-参见https://hexo.io/zh-cn/docs/github-pages.html
-
-### 添加tokens
-
-### 添加.travis.yml配置文件
-
-```
-sudo: false
-language: node_js
-node_js:
-  - 10 # use nodejs v10 LTS
-cache: npm
-branches:
-  only:
-    - master # 只监控 source 的 branch
-script:
-  - hexo generate # generate static files
-deploy:
-  provider: pages
-  skip-cleanup: true
-  github-token: $GH_TOKEN
-  keep-history: true
-  on:
-    branch: master # hexo 站点源文件所在的 branch
-  local_dir: public 
-  target_branch: public # 存放生成站点文件的 branch，使用 username.github.io 必须是 master
-```
-
-### 设置库的发布源
-
-### 稍等片刻 就可以访问 你的名字.github.io 预览了
-
-发布文章
+# 发布文章
 
 ```
 hexo new "My New Post"
