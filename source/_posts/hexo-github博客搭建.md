@@ -303,7 +303,7 @@ deploy:
 
 ## 四 发布
 
-![image-20210725170612738](https://raw.githubusercontent.com/czstara12/img_rope/master/img/image-20210725170612738.png)
+![image-20210725170612738](../img/image-20210725170612738.png)
 
 创建一个和你用户名相同的仓库，后面加github.io
 

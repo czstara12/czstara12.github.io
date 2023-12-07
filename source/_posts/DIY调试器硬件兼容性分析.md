@@ -29,4 +29,4 @@ tags:
 
 附标准jtag接口定义
 
-![jtag/swd](https://docs.platformio.org/en/latest/_images/generic_jtag_swd_connector.jpg)
+![jtag/swd](../img/generic_jtag_swd_connector.jpg)

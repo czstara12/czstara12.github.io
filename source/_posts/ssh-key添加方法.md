@@ -143,7 +143,7 @@ XwfEIMky3TSTsmo8mPw/N1TdFhBMepub/OJ0JG8VK73p6HnWUfxgQ4rnkvSuCes7
 
 ## 使用puttygen创建和转换秘钥
 
-![image-20210725170743623](https://raw.githubusercontent.com/czstara12/img_rope/master/img/image-20210725170743623.png)
+![image-20210725170743623](../img/image-20210725170743623.png)
 
 点击Generate生成秘钥对
 
@@ -161,5 +161,5 @@ OpenSSH key为老版本RSA格式
 
 OpenSSH key(force new file format)为新版本OPENSSH格式
 
-![image-20210725170814118](https://raw.githubusercontent.com/czstara12/img_rope/master/img/image-20210725170814118.png)
+![image-20210725170814118](../img/image-20210725170814118.png)
 

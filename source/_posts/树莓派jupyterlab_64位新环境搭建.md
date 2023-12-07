@@ -21,7 +21,7 @@ tags:
 
 注意下载下面的Raspberry Pi OS (64-bit)
 
-![image-20220213095204217](https://raw.githubusercontent.com/czstara12/img_rope/master/img/image-20220213095206016.png)
+![image-20220213095204217](../img/image-20220213095206016.png)
 
 插入内存卡
 
@@ -29,7 +29,7 @@ tags:
 
 SDFormatter
 
-![image-20220213095542097](https://raw.githubusercontent.com/czstara12/img_rope/master/img/image-20220213095542097.png)
+![image-20220213095542097](../img/image-20220213095542097.png)
 
 确定-确定
 
@@ -41,7 +41,7 @@ SDFormatter
 
 选择解压出来的文件
 
-![image-20220213095641391](https://raw.githubusercontent.com/czstara12/img_rope/master/img/image-20220213095641391.png)
+![image-20220213095641391](../img/image-20220213095641391.png)
 
 注意中间的设备是否为要写入的设备
 
@@ -76,7 +76,7 @@ network={
 
 要求电脑连接上面配置文件所连接的wifi
 
-![image-20220217132604488](https://raw.githubusercontent.com/czstara12/img_rope/master/img/image-20220217132604488.png)
+![image-20220217132604488](../img/image-20220217132604488.png)
 
 (注意 如果文件建好后与上图图标不一样或者类型一类显示不一样 请尝试关闭windows的隐藏拓展名功能 然后再把名称改到与图中一致)
 
@@ -100,9 +100,9 @@ sudo raspi-config
 
 拓展内存
 
-![image-20220217133442619](https://raw.githubusercontent.com/czstara12/img_rope/master/img/image-20220217133442619.png)
+![image-20220217133442619](../img/image-20220217133442619.png)
 
-![image-20220217133458250](https://raw.githubusercontent.com/czstara12/img_rope/master/img/image-20220217133458250.png)
+![image-20220217133458250](../img/image-20220217133458250.png)
 
 其余谨凭读者喜好设置(打开摄像头接口,打开VNC,打开串口,打开GPIO等)
 

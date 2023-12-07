@@ -68,7 +68,7 @@ STM32中定义两个位带操作区,分别位于片上外设区和SRAM
 字节地址为A，比特位序号为n(0<=n<=7)
 说明：“*4”表示一个字为4个字节，“*8”表示一个字节中有8个比特。
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200517115544488.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FCQ2lzQ09PTA==,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](../img/20200517115544488.png)
 
 统一转换公式
 

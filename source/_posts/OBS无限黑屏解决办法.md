@@ -19,7 +19,7 @@ obs软件图形性能首选项设置为节能，重启软件
 
 win10设置--系统--显示--图形设置
 
-![image-20210725170651712](https://raw.githubusercontent.com/czstara12/img_rope/master/img/image-20210725170651712.png)
+![image-20210725170651712](../img/image-20210725170651712.png)
 
-![image-20210725170709106](https://raw.githubusercontent.com/czstara12/img_rope/master/img/image-20210725170709106.png)
+![image-20210725170709106](../img/image-20210725170709106.png)
 

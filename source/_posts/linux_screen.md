@@ -138,7 +138,7 @@ Screen默认会为窗口命名为编号和窗口中运行程序名的组合，�
 
 **暂时中断会话**
 
-![img](https://images0.cnblogs.com/blog/370046/201301/29144351-ff7e78c079a44f51ae44d48b6942b87f.jpg)
+![img](../img/29144351-ff7e78c079a44f51ae44d48b6942b87f.jpg)
 
 半个小时之后回来了，找到该screen会话：
 
@@ -146,7 +146,7 @@ Screen默认会为窗口命名为编号和窗口中运行程序名的组合，�
 [root@TS-DEV ~]# screen -ls
 ```
 
-![img](https://images0.cnblogs.com/blog/370046/201301/29144759-7cea9fc3f5f4481ab21df8bd017c88ef.jpg)
+![img](../img/29144759-7cea9fc3f5f4481ab21df8bd017c88ef.jpg)
 
 重新连接会话：
 
@@ -160,13 +160,13 @@ Screen默认会为窗口命名为编号和窗口中运行程序名的组合，�
 
 这时可以使用下面命令强制将这个会话从它所在的终端分离，转移到新的终端上来：
 
-![img](https://images0.cnblogs.com/blog/370046/201301/29215655-6d2f0c7e7f294756a4b40a40e1e76a84.jpg)
+![img](../img/29215655-6d2f0c7e7f294756a4b40a40e1e76a84.jpg)
 
 ### **5.5 清除dead 会话**
 
 如果由于某种原因其中一个会话死掉了（例如人为杀掉该会话），这时screen -list会显示该会话为dead状态。使用screen -wipe命令清除该会话：
 
-![img](https://images0.cnblogs.com/blog/370046/201301/29154746-51185199905542c68d3c3b46dddef648.jpg)
+![img](../img/29154746-51185199905542c68d3c3b46dddef648.jpg)
 
 ### **5.6 关闭或杀死窗口**
 
@@ -210,7 +210,7 @@ Screen允许使用快捷键C-a s锁定会话。锁定以后，再进行任何输
 
 可以用C-a X快捷键关闭当前焦点所在的屏幕区块，也可以用C-a Q关闭除当前区块之外其他的所有区块。关闭的区块中的窗口并不会关闭，还可以通过窗口切换找到它。
 
-![img](https://images0.cnblogs.com/blog/370046/201301/29205553-38cdde403beb45f4814ca9a180987a9e.jpg)
+![img](../img/29205553-38cdde403beb45f4814ca9a180987a9e.jpg)
 
 ### **6.5 C/P模式和操作**
 
@@ -218,7 +218,7 @@ screen的另一个很强大的功能就是可以在不同窗口之间进行复�
 
 一般情况下，可以移动光标到指定位置，按下空格设置一个开头标记，然后移动光标到结尾位置，按下空格设置第二个标记，同时会将两个标记之间的部分储存在copy/paste buffer中，并退出copy/paste模式。在正常模式下，可以使用快捷键C-a ]将储存在buffer中的内容粘贴到当前窗口。
 
-![img](https://images0.cnblogs.com/blog/370046/201301/29210355-9026652834d446d2bbafa18fd7bca276.jpg)
+![img](../img/29210355-9026652834d446d2bbafa18fd7bca276.jpg)
 
 ### **6.6 更多screen功能**
 
