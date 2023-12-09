@@ -22,13 +22,13 @@ tags:
 
 ![ESP-01S][ESP-01S]
 
-## 1 基本操作
+## 基本操作
 
-### 1.1 刷写固件
+### 刷写固件
 
 *你也可以在[这里](https://espressif-docs.readthedocs-hosted.com/projects/esp-at/zh-cn/release-v2.2.0.0_esp8266/Get_Started/Downloading_guide.html)参考官方教程*
 
-### 1.1.1 下载
+### 下载
 
 在[这里](https://espressif-docs.readthedocs-hosted.com/projects/esp-at/zh-cn/release-v2.2.0.0_esp8266/AT_Binary_Lists/ESP32_AT_binaries.html)下载对应模块的固件
 
@@ -42,7 +42,7 @@ tags:
 
 直接下载[链接](https://github.com/czstara12/esp-at/suites/18900939376/artifacts/1103665107)
 
-### 1.1.2 硬件连接
+### 硬件连接
 
 ![2019-12-12_135802.png](https://pic.idzd.top/usr/uploads/2019/12/1215313008.png)
 
@@ -56,7 +56,7 @@ ESP-01S的`GPIO0`是工作模式选择：悬空：Flash Boot，工作模式； �
 
 所以在上电时让ESP-01S进入烧录模式,这里有一个小窍门,等到下载时再接上3V3,先接上其余四根线就可以让模块进入下载模式.
 
-### 1.1.3 烧录
+### 烧录
 
 下载好之后,请使用factory(工厂量产)的固件,设置量比较少.
 
@@ -70,7 +70,7 @@ ESP-01S的`GPIO0`是工作模式选择：悬空：Flash Boot，工作模式； �
 
 按下START,接上模块3V3线,等待进度条走完,没有出现红色报错即为成功.
 
-### 1.1.4 测试
+### 测试
 
 要求使用电脑和模块使用同一个局域网
 
@@ -108,7 +108,7 @@ AT+CIPSEND
 
 发送一些消息,检查是否成功接收.
 
-### 1.1.5 设置
+### 设置
 
 去掉IO0 —— GND这根线,将模块连接到电脑上,依次设置:
 
@@ -124,13 +124,13 @@ AT+CWJAP="WIFI名","WIFI密码"
 AT+SAVETRANSLINK=1,"192.168.31.210",8080,"TCP"
 ```
 
-# 2 使用姿势
+# 使用姿势
 
-## 2.1 模块-模块
+## 模块-模块
 
 未测试 待补充
 
-## 2.2 模块-路由器-电脑
+## 模块-路由器-电脑
 
 在设置开机启动透传命令里设置好网络调试助手的信息即可自动连接
 
