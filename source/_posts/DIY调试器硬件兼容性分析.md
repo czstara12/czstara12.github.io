@@ -15,17 +15,17 @@ tags:
 
 # daplink jlink stlink硬件兼容性分析
 
-| interface  | daplink        | jlink ob                      | stlink         | Black Magic Probe |
-| ---------- | -------------- | ----------------------------- | -------------- | ----------------- |
-| SWDIO/JTMS | PB14-100R-PB12 | PA7(PA4-R-PA7)                | PB14-100R-PB12 | (DIR:PA1)PA4      |
-| SWCLK/JTCK | PB13-PA5       | PA5(PA3-R-PA5-PB13)           | PB13-PA5       | PA5               |
-| JTDI       | NS             | PA2(PB0-R-PB14)               | PA7            | PA3               |
-| JTDO/SWO   | NS             | PA10(V1.4:PA6)(PA6-PB15-PA10) | PA6            | PA6               |
-| nRST       | PB0            | PA1(PA2-R-PA1)                | PB0            | PA2(IN:PA7)       |
-| UTX        | PA2            | NS                            | PA2            | PA9               |
-| URX        | PA3            | NS                            | PA3            | PA10              |
-| SWO        | PA10           | PA10                          | PA10           | PA6               |
-| USB D+     | NC             | PA9                           | PA15           | PA8               |
+| interface  | daplink        | jlink ob                      | stlink         |
+| ---------- | -------------- | ----------------------------- | -------------- |
+| SWDIO/JTMS | PB14-100R-PB12 | PA7(PA4-R-PA7)                | PB14-100R-PB12 |
+| SWCLK/JTCK | PB13-PA5       | PA5(PA3-R-PA5-PB13)           | PB13-PA5       |
+| JTDI       | NS             | PA2(PB0-R-PB14)               | PA7            |
+| JTDO/SWO   | NS             | PA10(V1.4:PA6)(PA6-PB15-PA10) | PA6            |
+| nRST       | PB0            | PA1(PA2-R-PA1)                | PB0            |
+| UTX        | PA2            | NS                            | PA2            |
+| URX        | PA3            | NS                            | PA3            |
+| SWO        | PA10           | PA10                          | PA10           |
+| USB D+     | NC             | PA9                           | PA15           |
 
 附标准jtag接口定义
 
