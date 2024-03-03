@@ -2,17 +2,19 @@
 title: 英特尔实感摄像头SDK安装
 date: 2021-07-15 15:08:22
 categories:
-- Linux
+- 树莓派教程
 tags:
-- realsense
-- Python
-- RaspberryPi 4B
-- RaspberryPi
+- 英特尔实感技术
+- 树莓派
+- SDK安装
+- T265
+- Python配置
 ---
 
-# 英特尔实感摄像头T265 SDK在树莓派4B上的编译安装
 
 <!-- more -->
+
+# 英特尔实感摄像头T265 SDK在树莓派4B上的编译安装
 
 ## 安装
 

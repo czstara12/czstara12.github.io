@@ -5,7 +5,8 @@ categories:
 - Linux
 tags:
 - dpkg
-- deb
+- 软件包管理
+- 命令行工具
 ---
 
 安装,搜索linux软件包

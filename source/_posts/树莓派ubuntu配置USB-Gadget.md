@@ -2,10 +2,13 @@
 title: 树莓派ubuntu配置USB Gadget
 date: 2022-02-21 09:26:07
 categories:
-- Raspberry Pi
+- 树莓派教程
+- 硬件配置
 tags:
-- linux
-- raspberrypi
+- 树莓派4
+- USB-OTG
+- Ubuntu
+- 网络配置
 ---
 
 树莓派安装ubuntu系统时USB Gadget的安装配置

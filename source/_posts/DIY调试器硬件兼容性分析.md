@@ -2,18 +2,23 @@
 title: DIY调试器硬件兼容性分析
 date: 2023-11-27 13:33:56
 categories:
-- 嵌入式硬件
+- 硬件
+- 嵌入式系统
 tags:
+- STM32F103CxT6
+- 调试器
 - daplink
 - jlink
 - stlink
+- IO分布
+- 硬件兼容性
 ---
 
-分析三个调试器在STM32F103CxT6上的io
+分析三个调试器在STM32F103CxT6上的io分布
 
 <!-- more -->
 
-# daplink jlink stlink硬件兼容性分析
+# daplink jlink stlink diy硬件兼容性分析
 
 | interface  | daplink        | jlink ob                      | stlink         |
 | ---------- | -------------- | ----------------------------- | -------------- |

@@ -1,11 +1,14 @@
 ---
 title: Discuzu和ubb代码大全
 date: 2020-04-08 15:35:41
-tags: 
-- Discuzu
-- UBB
 categories:
-- other
+- 网站开发
+- 论坛技术
+tags:
+- Discuz
+- UBB代码
+- 内容格式化
+- 文本编辑
 ---
 
 Discuzu和UBB代码收集

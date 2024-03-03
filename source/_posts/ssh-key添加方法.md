@@ -2,9 +2,13 @@
 title: ssh-key添加方法
 date: 2020-11-24 16:52:43
 categories:
-- Linux
+- 技术文章
 tags:
 - SSH
+- Linux
+- 免密登录
+- 秘钥生成
+- 秘钥转换
 ---
 
 本文记录SSH秘钥生成与linux免密登陆的操作步骤

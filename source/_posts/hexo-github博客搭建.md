@@ -2,10 +2,14 @@
 title: hexo+github博客搭建
 date: 2020-08-04 17:05:10
 categories:
-- blog
+- 技术
+- 博客搭建
 tags:
-- hexo
-- github
+- Hexo
+- GitHub Pages
+- Git
+- Node.js
+- 主题配置
 ---
 
 搭建github博客

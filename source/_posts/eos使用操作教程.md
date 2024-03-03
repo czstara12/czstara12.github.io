@@ -2,13 +2,15 @@
 title: eos使用操作教程
 date: 2021-11-07 20:29:49
 categories:
-- raspberrypi
+- 树莓派教程
 tags:
-- raspberrypi
-- Linux
-- opencv
-- 视觉
-- intel realsense T265
+- eos
+- 树莓派
+- jupyterlab
+- USB快速连接
+- 远程访问
+- opencv-python
+- realsense T265
 ---
 
 本文是对eos相关特色功能的介绍和使用教程 基于树莓派官方系统修改 有关原版官方系统的特性请参考[官方网站](https://www.raspberrypi.com/documentation/)和[github](https://github.com/raspberrypi/documentation) 

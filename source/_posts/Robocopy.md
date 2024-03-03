@@ -2,10 +2,12 @@
 title: Robocopy
 date: 2020-08-04 16:46:54
 categories:
-- windows
+- 技术文章
 tags:
 - robocopy
-- cmd
+- 文件备份
+- 命令行工具
+- Windows工具
 ---
 
 robocopy可以为我们建立两个目录之间的镜像 我们通过镜像的功能 可以帮助我们自动的挑选有更新的文件进行复制

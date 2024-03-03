@@ -2,11 +2,12 @@
 title: OBS无限黑屏解决办法
 date: 2020-12-07 17:25:15
 categories:
-- other
+- 技术教程
 tags:
 - OBS
-- 直播
-- 录屏
+- Windows 10
+- 问题解决
+- 软件配置
 ---
 
 解决win10下OBS无限黑屏

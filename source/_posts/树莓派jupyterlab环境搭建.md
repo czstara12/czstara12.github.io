@@ -2,14 +2,16 @@
 title: 树莓派jupyterlab环境搭建
 date: 2020-11-09 11:02:31
 categories:
-- Linux
+- 树莓派教程
 tags:
-- Python
-- RaspberryPi
+- 树莓派4
+- usb-otg
+- 环境搭建
+- 镜像备份
 - jupyterLab
 ---
 
-本文介绍了树莓派web python(jupyterLab)运行环境的搭建方法
+树莓派web python(jupyterLab)运行环境的搭建方法
 
 以及对应的批量制作时的备份镜像方法
 

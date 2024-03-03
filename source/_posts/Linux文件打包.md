@@ -3,11 +3,12 @@ title: Linux文件打包
 date: 2020-12-07 17:28:50
 categories:
 - Linux
+- 命令行工具
 tags:
 - tar
-- 打包
-- 命令行
-- linux
+- 压缩
+- 解压缩
+- 文件管理
 ---
 
 打包压缩文件

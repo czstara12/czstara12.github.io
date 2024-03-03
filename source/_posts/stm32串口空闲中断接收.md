@@ -2,16 +2,20 @@
 title: stm32串口空闲中断接收
 date: 2021-03-10 15:21:13
 categories:
-- c/c++
+- 嵌入式开发
+- STM32
 tags:
-- stm32
-- uart
-- dma
+- STM32
+- HAL库
+- 串口通信
+- DMA接收
+- 空闲中断
 ---
 
-# STM32 HAL库 串口空闲中断
 
 <!-- more -->
+
+# STM32 HAL库 串口空闲中断
 
 开启
 

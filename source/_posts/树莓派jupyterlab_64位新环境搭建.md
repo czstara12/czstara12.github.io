@@ -2,14 +2,20 @@
 title: 树莓派jupyterlab_64位新环境搭建
 date: 2022-02-12 17:05:31
 categories:
-- Linux
+- 树莓派教程
 tags:
+- 树莓派
+- 环境搭建
+- JupyterLab
 - Python
-- RaspberryPi
-- jupyterLab
+- 系统备份
+- 网络配置
+- SSH
+- VNC
+- OpenCV
 ---
 
-本文介绍了新版树莓派64位web python(jupyterLab)运行环境的搭建方法
+新版树莓派64位web python(jupyterLab)运行环境的搭建方法
 
 以及对应的批量制作时的备份镜像方法
 
@@ -277,7 +283,7 @@ raspberrypi.local:8888
 或者找到树莓派的具体ip 然后访问
 
 ```
-192.168.1.xxx.xxx(树莓派的IP):8888
+192.168.xxx.xxx(树莓派的IP):8888
 ```
 
 进入编程界面

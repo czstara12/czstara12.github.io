@@ -2,9 +2,13 @@
 title: GNU Screen
 date: 2020-04-12 12:12:37
 categories:
-- linux
+- Linux
+- 工具使用
 tags:
-- linux screen
+- GNU Screen
+- 终端管理
+- SSH
+- 系统管理
 ---
 
 GNU Screen

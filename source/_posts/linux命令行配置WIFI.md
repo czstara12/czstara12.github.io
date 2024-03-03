@@ -2,17 +2,17 @@
 title: linux命令行配置WIFI
 date: 2023-11-27 13:31:28
 categories:
-- linux
+- 技术文章
 tags:
-- WIFI
-- raspberry pi
-- jetson none
-- ubuntu
+- 树莓派
+- Jetson Nano
+- WIFI配置
+- 命令行
+- Ubuntu
+- NetworkManager
 ---
 
-摘要
-
-树莓派 nano等无显示器配置WIFI
+树莓派 jetson nano等无显示器配置WIFI
 
 <!-- more -->
 
@@ -65,5 +65,3 @@ nmcli dev wifi
 ```
 nmcli dev wifi connect "SSID" password "PASSWORD" ifname wlan0
 ```
-
-## 

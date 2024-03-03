@@ -2,9 +2,13 @@
 title: 树莓派4B usb-otg 连接电脑
 date: 2022-02-12 16:44:05
 categories:
-- Linux
+- 技术教程
+- 树莓派
 tags:
-- RaspberryPi
+- 树莓派4
+- USB-OTG
+- 网络配置
+- 热点设置
 ---
 
 # 树莓派4 usb-otg

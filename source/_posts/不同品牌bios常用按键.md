@@ -2,9 +2,12 @@
 title: 不同品牌bios常用按键
 date: 2020-08-04 17:00:23
 categories:
-- other
+- 电脑硬件
+- 电脑维修
 tags:
-- bios
+- BIOS
+- 启动按键
+- 品牌电脑
 ---
 
 不同品牌bios常用按键对应表 仅供参考
