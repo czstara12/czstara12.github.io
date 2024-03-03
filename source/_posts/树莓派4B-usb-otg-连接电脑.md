@@ -11,13 +11,14 @@ tags:
 - 热点设置
 ---
 
-# 树莓派4 usb-otg
 
 本文记录了将树莓派通过自带的usb type-c口连接到电脑 从而控制树莓派的方法 适用于树莓派zero 树莓派4B
 
 同时附带树莓派热点连接电脑方法
 
 <!-- more -->
+
+# 树莓派4 usb-otg
 
 本文使用的脚本修改自[rpi-usb-gadget](https://github.com/kmpm/rpi-usb-gadget)
 
