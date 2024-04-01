@@ -36,9 +36,16 @@ tar -xf apache-cassandra-4.1.4-bin.tar.gz
 
 ## 启动
 
+如果重新启动终端需要运行
+
 ```bash
 wsl
 cd ~
+```
+
+安装好后可以直接接着运行此处
+
+```bash
 cd apache-cassandra-4.1.4/bin
 ./cassandra
 ./cqlsh
