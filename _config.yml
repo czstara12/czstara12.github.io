@@ -3,8 +3,8 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 星辰物语的编程分享
-subtitle: "starstory's programming sharing"
+title: 星辰物语的个人博客
+subtitle: "Personal blog of StarStory"
 description: '热爱研究各类电子技术'
 keywords: 
 author: 星辰物语
@@ -13,7 +13,7 @@ timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://czstara12.github.io
+url: https://3939831.xyz
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -98,8 +98,7 @@ theme: next #landscape
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type: git
-  repo: https://github.com/czstara12/czstara12.github.io
+  # type: git
+  # repo: https://github.com/czstara12/czstara12.github.io
   # example, https://github.com/hexojs/hexojs.github.io
   # branch: gh-pages
-  branch: master
