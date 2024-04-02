@@ -1,0 +1,11 @@
+torch
+torchsummary
+torchvision
+numpy
+tensorflow
+Pillow
+tqdm
+scikit-learn
+matplotlib
+ipython
+jupyter
