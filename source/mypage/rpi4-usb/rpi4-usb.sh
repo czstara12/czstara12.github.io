@@ -1,56 +1,3 @@
----
-title: 树莓派4B usb-otg 连接电脑
-date: 2022-02-12 16:44:05
-categories:
-- 技术教程
-- 树莓派
-tags:
-- 树莓派4
-- USB-OTG
-- 网络配置
-- 热点设置
----
-
-
-本文记录了将树莓派通过自带的usb type-c口连接到电脑 从而控制树莓派的方法 适用于树莓派zero 树莓派4B
-
-同时附带树莓派热点连接电脑方法
-
-<!-- more -->
-
-# 树莓派4 usb-otg
-
-本文使用的脚本修改自[rpi-usb-gadget](https://github.com/kmpm/rpi-usb-gadget)
-
-[这里](https://www.hardill.me.uk/wordpress/2019/11/02/pi4-usb-c-gadget/)是有关修改方法的介绍
-
-打开树莓派USB OTG模式。修改`/boot/config.txt`文件，在最后一行加入：
-
-```bash
-dtoverlay=dwc2
-```
-
-载入内核模块，启动USB网卡功能。修改`/boot/cmdline.txt`文件，在第一行末尾添加空格并加入：
-
-```bash
-modules-load=dwc2
-```
-
-导入相关库 修改`/etc/modules`文件,添加以下内容:
-
-```
-libcomposite
-```
-
-修改ip 在/etc/dhcpcd.conf末尾添加
-
-```
-denyinterfaces usb0
-```
-
-运行这个脚本 最新版基于debain 12的系统不能使用这个脚本 脚本原作者已[更新](https://github.com/kmpm/rpi-usb-gadget)修复
-
-```
 #!/bin/bash
 # Set up a Raspberry Pi 4 as a USB-C Ethernet Gadget
 # Based on:
@@ -91,7 +38,7 @@ teeconfirm() {
 ##### Actual work #####
 
 cat << EOF
-This script will modify '/boot/config.txt', '/boot/cmdline.txt' and other files.
+This script will modify '/boot/firmware/config.txt', '/boot/firmware/cmdline.txt' and other files.
 Warning, It might brick your device!
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -104,15 +51,15 @@ Continue with modifications?
 EOF
 ! confirm && exit
 
-teeconfirm "dtoverlay=dwc2" "/boot/config.txt"
+teeconfirm "dtoverlay=dwc2" "/boot/firmware/config.txt"
 
-if ! $(grep -q modules-load=dwc2 /boot/cmdline.txt) ; then
+if ! $(grep -q modules-load=dwc2 /boot/firmware/cmdline.txt) ; then
     echo
-    echo "Add the line modules-load=dwc2 to /boot/cmdline.txt"
+    echo "Add the line modules-load=dwc2 to /boot/firmware/cmdline.txt"
     if ! confirm ; then
         exit
     fi
-    sudo sed -i '${s/$/ modules-load=dwc2/}' /boot/cmdline.txt
+    sudo sed -i '${s/$/ modules-load=dwc2/}' /boot/firmware/cmdline.txt
 fi
 
 teeconfirm "libcomposite" "/etc/modules"
@@ -287,24 +234,26 @@ echo -e "the systemd unit file for usb-gadget.\n"
 
 
 # make sure $USBFILE runs on every boot using $UNITFILE
-if [[ ! -e $UNITFILE ]] ; then
-    cat << EOF | sudo tee $UNITFILE > /dev/null
-[Unit]
-Description=USB gadget initialization
-After=network-online.target
-Wants=network-online.target
-#After=systemd-modules-load.service
-[Service]
-Type=oneshot
-RemainAfterExit=yes
-ExecStart=$USBFILE $DEVICETYPE
-[Install]
-WantedBy=sysinit.target
-EOF
-    echo "Created $UNITFILE"
-    sudo systemctl daemon-reload
-    sudo systemctl enable usb-gadget
-fi
+# if [[ ! -e $UNITFILE ]] ; then
+#     cat << EOF | sudo tee $UNITFILE > /dev/null
+# [Unit]
+# Description=USB gadget initialization
+# After=network-online.target
+# Wants=network-online.target
+# #After=systemd-modules-load.service
+# [Service]
+# Type=oneshot
+# RemainAfterExit=yes
+# ExecStart=$USBFILE $DEVICETYPE
+# [Install]
+# WantedBy=sysinit.target
+# EOF
+#     echo "Created $UNITFILE"
+#     sudo systemctl daemon-reload
+#     sudo systemctl enable usb-gadget
+# fi
+
+teeconfirm "$USBFILE $DEVICETYPE" "/etc/rc.local"
 
 cat << EOF
 Done setting up as USB gadget
@@ -314,63 +263,3 @@ If you want to disable the usb0/gadget interface then
 please run 'sudo systemctl disable usb-gadget'
 and reboot.
 EOF
-
-```
-
-一路选择y
-
-中间选择1
-
-最后重启
-
-主要教程至此结束 以下为附加内容
-
-## 配置IP问题
-
-两种方式
-
-1. 添加dhcp服务 让电脑可以自动获取合适的ip
-
-   使用dnsmasq
-
-2. 修改网卡配置为静态ip
-
-   控制面板 网络连接 属性 ip
-
-   树莓派静态ip暂时设置为 192.168.39.39
-
-### 配置DHCP
-
-```
-sudo apt-get update
-sudo apt-get install dnsmasq
-sudo touch /etc/dnsmasq.d/usb0.conf
-```
-
-```
-interface=usb0
-dhcp-option=3
-dhcp-range=192.168.39.100,192.168.39.255,255.255.255.0,12h
-```
-
-附一个树莓派热点开启方法
-
-## 树莓派热点
-
-通过create_ap组件
-
-```
-sudo apt-get install hostapd
-git clone https://github.com/oblique/create_ap
-cd create_ap
-sudo make install
-```
-
-开热点前要把默认开启的usb网络关闭(如果配置了的话)
-
-```
-systemctl stop dnsmasq.service
-create_ap -n wlan0 --no-virt -c 7 wifissid
-```
-
-也可以参考[树莓派官方教程](https://www.raspberrypi.org/documentation/configuration/wireless/access-point-routed.md)
