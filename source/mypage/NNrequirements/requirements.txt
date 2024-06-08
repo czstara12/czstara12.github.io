@@ -13,3 +13,5 @@ opencv-python
 pandas
 scikit-image
 imgaug
+TensorRT
+pydot
