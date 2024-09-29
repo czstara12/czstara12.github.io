@@ -1,10 +1,8 @@
 ---
 title: WSL导入与导出
-date: 2024-8-31 10:00:00
+date: 2024-09-29 11:26:41
 categories:
-- WSL2
 tags:
-- WSL2
 ---
 
 WSL导入与导出
