@@ -340,3 +340,13 @@ hexo new "My New Post"
 ```
 
 编写source/_posts/下的对应的.md文件
+
+## 附
+
+cloudflare也可以免费部署博客页面 而且在全球有CDN加速
+
+[官方教程](https://developers.cloudflare.com/pages/framework-guides/deploy-a-hexo-site/)
+
+需要注意 有些新版本hexo指令前面需要加上npx
+
+例如npx hexo g
